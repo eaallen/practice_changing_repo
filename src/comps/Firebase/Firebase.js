@@ -5,14 +5,15 @@ import React from 'react'
 export const AppContext = React.createContext()
 
     const config = {
-      apiKey: "AIzaSyBvK4vqOo-mH3iQmFDz0FxjtZs_1nl3jdw",
-      authDomain: "fir-react-template-9576f.firebaseapp.com",
-      databaseURL: "https://fir-react-template-9576f.firebaseio.com",
-      projectId: "fir-react-template-9576f",
-      storageBucket: "fir-react-template-9576f.appspot.com",
-      messagingSenderId: "277936020424",
-      appId: "1:277936020424:web:0861866f76cf0de722befd",
-      measurementId: "G-BPZ04SPK8F"
+      // your config info here
+      // apiKey: ,
+      // authDomain: ,
+      // databaseURL: ,
+      // projectId: ,
+      // storageBucket: ,
+      // messagingSenderId: ,
+      // appId:,
+      // measurementId: 
     };
    
     class Firebase extends React.Component {
