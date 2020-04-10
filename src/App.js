@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import {withFirebase} from './comps/Firebase'
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {props.context.test}
         </p>
         <a
           className="App-link"
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default withFirebase(App);
