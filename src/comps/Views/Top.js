@@ -1,9 +1,10 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
+import * as bs from 'react-bootstrap'
 function Home(props) {
   return (
-    <div>
-       here we go
+    <div className="bg-dark">
+       <h4>Blog site</h4>
     </div>
   );
 }

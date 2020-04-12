@@ -2,23 +2,23 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {withFirebase} from './comps/Firebase'
+import * as bs from 'react-bootstrap'
+import Home from './comps/Views/Home'
+import Top from './comps/Views/Top'
+
 function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {props.context.test}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <bs.Row>
+        <bs.Col>
+          <Top/>
+        </bs.Col>
+      </bs.Row>
+      <bs.Row>
+        <bs.Col>
+          <Home/>
+        </bs.Col>
+      </bs.Row>
     </div>
   );
 }
