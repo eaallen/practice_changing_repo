@@ -9,9 +9,11 @@ function ItemCard(props) {
         </div>   
         <div className='card-body'>
             <img className='image item_img' src={`/img/${props.id}.jpg`}/>
-            {props.price}
+            
         </div>   
-        
+        <div className='card-foot'>
+            {props.price}
+        </div>
     </div>
   );
 }

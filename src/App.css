@@ -56,11 +56,16 @@
   padding: 3rem;
   
 }
+.item_img{
+  transition: all 0.5s;
+}
 .item_img:hover{
-  transform: scale(1.2)
+  transform: scale(1.7);
+  
 }
 .card-foot{
-  background-color: lightgray;
+  background-color: white;
+  padding-bottom: 1rem;
 }
 
 

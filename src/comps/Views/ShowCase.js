@@ -6,13 +6,13 @@ function ShowCase(props) {
   return (
     <div className="">
         <bs.Row>
-            <bs.Col>
+            <bs.Col md={4}>
                 <ItemCard title='Lorem' price='$23.33' id={1}/>
             </bs.Col>
-            <bs.Col>
+            <bs.Col md={4}>
                 <ItemCard title='Lorem' price='$23.33'id={2}/>
             </bs.Col>
-            <bs.Col>
+            <bs.Col md={4}>
                 <ItemCard title='Lorem' price='$23.33'id={3}/>
             </bs.Col>
         </bs.Row>       
