@@ -46,7 +46,22 @@
   top: 50%;
   right: 25px;
 }
-
+.card-head{
+  background-color: lightgrey;
+  font-size: larger;
+}
+.card-body{
+  background-color: white;
+  overflow: hidden;
+  padding: 3rem;
+  
+}
+.item_img:hover{
+  transform: scale(1.2)
+}
+.card-foot{
+  background-color: lightgray;
+}
 
 
 
