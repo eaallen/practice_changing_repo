@@ -8,17 +8,19 @@ import Top from './comps/Views/Top'
 
 function App(props) {
   return (
-    <div className="App">
-      <bs.Row>
-        <bs.Col>
-          <Top/>
-        </bs.Col>
-      </bs.Row>
-      <bs.Row>
-        <bs.Col>
-          <Home/>
-        </bs.Col>
-      </bs.Row>
+    <div>
+      <bs.Container >
+        <bs.Row>
+          <bs.Col>
+            <Top/>
+          </bs.Col>
+        </bs.Row>
+        <bs.Row>
+          <bs.Col>
+            <Home/>
+          </bs.Col>
+        </bs.Row>
+      </bs.Container>
     </div>
   );
 }
