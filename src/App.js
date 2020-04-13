@@ -9,17 +9,20 @@ import Top from './comps/Views/Top'
 function App(props) {
   return (
     <div>
-      <bs.Container >
-        <bs.Row>
-          <bs.Col>
-            <Top/>
-          </bs.Col>
-        </bs.Row>
-        <bs.Row>
-          <bs.Col>
-            <Home/>
-          </bs.Col>
-        </bs.Row>
+      <bs.Container>
+        <div className='bg-dark text-light'>
+          <bs.Row noGutters>
+            <bs.Col>
+              <Top/>
+            </bs.Col>
+          </bs.Row>
+        
+          <bs.Row noGutters>
+            <bs.Col>
+              <Home/>
+            </bs.Col>
+          </bs.Row>
+        </div>
       </bs.Container>
     </div>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
-function Home(props) {
+function Top(props) {
   return (
     <div className="bg-dark text-light">
-        <bs.Row>
+        <bs.Row noGutters>
             <bs.Col className='text-left'>
                 <h4>Kandin's Place</h4>
                             
@@ -22,7 +22,7 @@ function Home(props) {
                     </bs.Col>
                 </bs.Row>            
             </bs.Col>
-            <bs.Col className='text-right'>
+            <bs.Col className='text-right' >
                 <bs.Button>
                     Sign in
                 </bs.Button>
@@ -34,4 +34,4 @@ function Home(props) {
   );
 }
 
-export default withFirebase(Home);
+export default withFirebase(Top);

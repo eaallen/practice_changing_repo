@@ -39,21 +39,14 @@
  
   width: 100%;
   z-index: 0;
+  padding: 5%;
 }
 .pos{
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: 25px;
 }
-.cropped {
-  width: 100%; /* width of container */
-  height: 40rem; /* height of container */
-  overflow: hidden;
 
-}
-.cropped img {
-  margin: -200px 0px 0px 0px;
-}
 
 
 

@@ -1,31 +1,30 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
+import ShowCase from './ShowCase'
 let images = [1,2,3]
 function Home(props) {
     const [img,setImg] = React.useState(1)
     // setInterval(_next(), 1000)
-    const _next = ()=>{
-        console.log('before',images)
-        let holder = images.shift()
-        console.log('during',holder, images)        
-        images.push(holder)
-        console.log('after',images)
+    const _next = ()=>{        
+        let holder = images.shift()           
+        images.push(holder)        
         setImg(images[0])
     }
   return (
     <div>
-        <bs.Row>
-            <bs.Col>
-                <div className='home-img'>
+        <bs.Row noGutters>
+            <bs.Col className='text-center' >
+                <div className='home-img bg-dark'>
                     <img className='image' src={`/img/${img}.jpg`} />
+                    
                 </div>
-                <div className='btn btn-primary pos' onClick={e=>_next(e)}>
-                    next>
+                <div className='btn btn-light outline-light pos' onClick={e=>_next(e)}>
+                    next
                 </div>
             </bs.Col>
         </bs.Row>
-       <bs.Row >
+       <bs.Row  >
             <bs.Col>
                 <h1>
                     Research                     
@@ -56,10 +55,11 @@ function Home(props) {
                 </p>
             </bs.Col>
         </bs.Row> 
-        <bs.Jumbotron>
-           <h1>
-               Clothes with a story.
-           </h1>
+        <h1>
+            Clothes with a story.
+        </h1>
+        <bs.Jumbotron className='text-dark'>
+           <ShowCase/>
         </bs.Jumbotron>
         <bs.Row  className='center-bs.Row'>
             <bs.Col>
