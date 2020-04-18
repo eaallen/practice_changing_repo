@@ -41,6 +41,17 @@
   z-index: 0;
   padding: 5%;
 }
+.image-detail{
+  position: relative;
+  
+  width: 100%;
+  z-index: 0;
+  padding: 5%;
+}
+.image-container{
+  overflow: hidden;
+  text-align: right ;
+}
 .pos{
   position: absolute;
   top: 50%;

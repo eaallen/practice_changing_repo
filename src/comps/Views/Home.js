@@ -14,8 +14,8 @@ function Home(props) {
   return (
     <div>
         <bs.Row noGutters>
-            <bs.Col className='text-center' >
-                <div className='home-img bg-dark'>
+            <bs.Col className='text-center'>
+                <div className='home-img'>
                     <img className='image' src={`/img/${img}.jpg`} />
                     
                 </div>
@@ -24,7 +24,7 @@ function Home(props) {
                 </div>
             </bs.Col>
         </bs.Row>
-       <bs.Row  >
+       <bs.Row >
             <bs.Col>
                 <h1>
                     Research                     
@@ -58,9 +58,9 @@ function Home(props) {
         <h1>
             Clothes with a story.
         </h1>
-        <bs.Jumbotron className='text-dark'>
-           <ShowCase/>
-        </bs.Jumbotron>
+        
+        <ShowCase/>
+        
         <bs.Row  className='center-bs.Row'>
             <bs.Col>
                 <h1>

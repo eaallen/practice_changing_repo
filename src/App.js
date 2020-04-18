@@ -5,21 +5,37 @@ import {withFirebase} from './comps/Firebase'
 import * as bs from 'react-bootstrap'
 import Home from './comps/Views/Home'
 import Top from './comps/Views/Top'
+import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ItemDetail from './comps/Views/ItemDetail';
+import ScrollToTop from './constanst/ScrollTop';
 
 function App(props) {
   return (
     <div>
       <bs.Container>
-        <div className='bg-dark text-light'>
+        <div className='text-dark'>
           <bs.Row noGutters>
             <bs.Col>
               <Top/>
             </bs.Col>
           </bs.Row>
         
-          <bs.Row noGutters>
+          <bs.Row >
             <bs.Col>
-              <Home/>
+              <div style={{padding:'1rem'}}>
+              <Router>
+                <ScrollToTop>
+                <Switch>
+                  <Route path='/itemDetail/:id'>
+                    <ItemDetail/>
+                  </Route>
+                  <Route path='/'>
+                    <Home/>
+                  </Route>
+                </Switch>
+                </ScrollToTop>
+              </Router>
+              </div>
             </bs.Col>
           </bs.Row>
         </div>
