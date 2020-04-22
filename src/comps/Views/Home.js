@@ -15,9 +15,8 @@ function Home(props) {
     <div>
         <bs.Row noGutters>
             <bs.Col className='text-center'>
-                <div className='home-img'>
-                    <img className='image' src={`/img/${img}.jpg`} />
-                    
+                <div className='image-container'>
+                    <img className='image-detail' src={`/img/6.jpg`}/>
                 </div>
                 <div className='btn btn-light outline-light pos' onClick={e=>_next(e)}>
                     next

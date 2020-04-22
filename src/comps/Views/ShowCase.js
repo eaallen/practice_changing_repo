@@ -24,7 +24,7 @@ function ShowCase(props) {
   );
 }
 const random_id = () =>{
-    let arr = [1,2,3,4,5]
+    let arr = [1,2,3,4,5,7,8]
     let arr_id = []
     for(let icount = 1; icount <= 3; icount++){
         let id

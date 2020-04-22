@@ -20,10 +20,10 @@ function ItemDetail(props) {
                 <div>
                     <h1>Title</h1>
                     <p>
-                    Aenean efficitur nisl quis augue finibus, laoreet vestibulum tortor dignissim. Ut auctor dolor odio,
-                    in sodales turpis vehicula ut. Sed dapibus massa a sodales convallis. Nam tempor ante sed orci posuere,
-                    non sollicitudin sapien finibus. 
-                    Phasellus scelerisque nec nulla nec iaculis. Sed vulputate condimentum quam, non lacinia neque aliquam scelerisque
+                        Aenean efficitur nisl quis augue finibus, laoreet vestibulum tortor dignissim. Ut auctor dolor odio,
+                        in sodales turpis vehicula ut. Sed dapibus massa a sodales convallis. Nam tempor ante sed orci posuere,
+                        non sollicitudin sapien finibus. 
+                        Phasellus scelerisque nec nulla nec iaculis. Sed vulputate condimentum quam, non lacinia neque aliquam scelerisque
                     </p>
                     <br></br>
                     <p>
