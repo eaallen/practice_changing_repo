@@ -13,7 +13,7 @@ const INITIAL_STATE = {
     error: null,
   };
 
-class Sign_up_form_base extends React.Component {
+class SignUpFormBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
@@ -81,7 +81,7 @@ class Sign_up_form_base extends React.Component {
           <Button onClick={this.onSubmit} className='option long-submit' disabled={isInvalid}>
             Sign Up
           </Button>
-          {error && <p>{error.message}</p>}
+          {this.state.error && <p>{this.state.error.message}</p>}
 
         </Form>
       </div>
@@ -90,5 +90,5 @@ class Sign_up_form_base extends React.Component {
   }
 }
 
-const Sign_up_form = withRouter(withFirebase(Sign_up_form_base));
-export default Sign_up_form;
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+export default SignUpForm;

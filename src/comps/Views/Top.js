@@ -26,10 +26,9 @@ function Top(props) {
                     </bs.Row>            
                 </bs.Col>
                 <bs.Col className='text-right' >
-                    <bs.Button>
+                    <Link to="/Authenticate">
                         Sign in
-                    </bs.Button>
-                                
+                    </Link>
                 </bs.Col>
             </bs.Row>
         </bs.Container>

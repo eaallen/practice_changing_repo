@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouteMatch, /*useHistory,*/Link} from "react-router-dom";
-import Purchase_form from '../Forms/Customer/Purchase_form'
+import PurchaseForm from '../Forms/Customer/PurchaseForm'
 function Purchase(props){
     const match = useRouteMatch('/purchase/:id')
     const id = match.params.id
@@ -11,7 +11,7 @@ function Purchase(props){
             <br/>
             <br/>
             <br/>
-            <Purchase_form />
+            <PurchaseForm />
         </div>
     )
 }

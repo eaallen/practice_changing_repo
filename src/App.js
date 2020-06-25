@@ -8,7 +8,7 @@ import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ItemDetail from './comps/Views/ItemDetail';
 import ScrollToTop from './constanst/ScrollTop';
 import Purchase from './comps/Views/Purchase';
-
+import Authenticate from './comps/Views/Authenticate'
 function App(props) {
   return (
     <div>
@@ -26,8 +26,11 @@ function App(props) {
               <div style={{padding:'1rem'}}>
                 <ScrollToTop>
                   <Switch>
-                    <Route path='/itemDetail/:id'>
+                  <Route path='/itemDetail/:id'>
                       <ItemDetail/>
+                    </Route>
+                    <Route path='/Authenticate'>
+                      <Authenticate/>
                     </Route>
                     <Route path='/purchase/:id'>
                       <Purchase/>

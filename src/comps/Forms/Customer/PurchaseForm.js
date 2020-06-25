@@ -13,7 +13,7 @@ const INITIAL_STATE = {
     error: null,
   };
 
-class Purchse_form_base extends React.Component {
+class PurchaseFormBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
@@ -94,5 +94,5 @@ class Purchse_form_base extends React.Component {
   }
 }
 
-const Purchse_form = withRouter(withFirebase(Purchse_form_base));
-export default Purchse_form;
+const PurchaseForm = withRouter(withFirebase(PurchaseFormBase));
+export default PurchaseForm;
