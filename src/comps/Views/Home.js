@@ -4,22 +4,14 @@ import * as bs from 'react-bootstrap'
 import ShowCase from './ShowCase'
 let images = [1,2,3]
 function Home(props) {
-    const [img,setImg] = React.useState(1)
-    // setInterval(_next(), 1000)
-    const _next = ()=>{        
-        let holder = images.shift()           
-        images.push(holder)        
-        setImg(images[0])
-    }
+    
   return (
     <div>
         <bs.Row noGutters>
             <bs.Col className='text-center'>
-                <div className='image-container'>
-                    <img className='image-detail' src={`/img/6.jpg`}/>
-                </div>
-                <div className='btn btn-light outline-light pos' onClick={e=>_next(e)}>
-                    next
+                <div className='home-img'>
+                    <img className='image' src={`/img/landscape/${100}.jpg`} />
+                    
                 </div>
             </bs.Col>
         </bs.Row>

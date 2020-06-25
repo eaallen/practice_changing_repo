@@ -52,6 +52,15 @@
   overflow: hidden;
   text-align: right ;
 }
+.bg-img{
+  padding-top: 10rem;
+  padding-bottom: 25rem;
+  /* background-image: url("/img/landscape/101.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.welcome{
+}
 .pos{
   position: absolute;
   top: 50%;
