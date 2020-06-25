@@ -40,46 +40,42 @@ class Sign_up_form_base extends React.Component {
   };
   render() {
     const isInvalid = this.state.passwordOne !==this.state.passwordTwo || this.state.email ==='' || this.state.passwordOne===''
-    const {
-        
-        email,
-        passwordOne,
-        passwordTwo,
-        error,
-      } = this.state;
+    
     return (
         <Jumbotron>
-      <div className='customForm'>
-          <h3>Sign Up</h3>
+            <div className='customForm'>
+            <h3>Sign Up</h3>
         <Form onSubmit={this.onSubmit}>
         <Form.Group>
           <Form.Control 
-            
             name="email"
-            value={email}
+            value={this.state.email}
             onChange={this.onChange}
             type="text"
             placeholder="Email Address"
+            required
           />
         </Form.Group>
         <Form.Group>  
           <Form.Control
             name="passwordOne"
             className='long-input color-box'
-            value={passwordOne}
+            value={this.state.passwordOne}
             onChange={this.onChange}
             type="password"
             placeholder="Password"
+            required
           />
          </Form.Group>
          <Form.Group>     
           <Form.Control
             name="passwordTwo"
             className='long-input color-box'
-            value={passwordTwo}
+            value={this.state.passwordTwo}
             onChange={this.onChange}
             type="password"
             placeholder="Confirm Password"
+            required
           /> 
           </Form.Group>  
           <Button onClick={this.onSubmit} className='option long-submit' disabled={isInvalid}>
