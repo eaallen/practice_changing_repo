@@ -1,19 +1,21 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 function Top(props) {
   return (
     <div className="bg-dark text-light">
         <bs.Container fluid>
             <bs.Row noGutters>
                 <bs.Col className='text-left'>
-                    <h4>Kandin's Place</h4>
+                    <h4><Link to="/">Kandin's Place</Link></h4>
                                 
                 </bs.Col>
                 <bs.Col>
                     <bs.Row noGutters>
                         <bs.Col>
-                        Shop
+                            
+                            Shop
                         </bs.Col>
                         <bs.Col>
                             About

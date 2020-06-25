@@ -1,11 +1,10 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
-import ItemCard from './ItemCard'
-import { useRouteMatch, useHistory} from "react-router-dom";
+import { useRouteMatch, /*useHistory,*/Link} from "react-router-dom";
 import ShowCase from './ShowCase'
 function ItemDetail(props) {
-    const history = useHistory()
+    // const history = useHistory()
     const match = useRouteMatch('/itemDetail/:id')
     const id = match.params.id
   return (
@@ -29,7 +28,7 @@ function ItemDetail(props) {
                     <p>
                         price: $23.33
                     </p>
-                    <bs.Button variant='outline-dark'>Purchase</bs.Button>
+                    <Link className="btn btn-dark" to={`/purchase/${id}`}>Purchase</Link>
                 </div>
             </bs.Col>
         </bs.Row>
