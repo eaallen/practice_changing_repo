@@ -2,9 +2,15 @@ import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
 function ToolPage(props) {
-    const col =  []
-    const data = []
-    const name = null
+    const col =  ['customer_email','customer_size']
+    const data = [
+        ['eli@fake.com','l'],
+        ['beth@fake.com','m'],
+        ['kandin@fake.com','xs'],
+        ['alex@fake.com','l'],
+        ['admin@fake.com','xl']
+    ]
+    const name = 'customer'
 
   return (
     <div>
