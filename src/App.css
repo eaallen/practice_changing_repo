@@ -89,7 +89,16 @@
 }
 
 
-
+.rel{
+  position: relative;
+}
+.abs{
+  position: absolute;
+}
+.my-over-flow{
+  width: 3rem;
+  white-space: nowrap; 
+}
 
 
 

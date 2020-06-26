@@ -2,6 +2,7 @@ import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Toggle from '../Tools/Toggle';
 function Top(props) {
   return (
     <div className="bg-dark text-light">
@@ -12,14 +13,32 @@ function Top(props) {
         <bs.Navbar.Toggle aria-controls="basic-bs.Navbar-bs.Nav" />
         <bs.Navbar.Collapse id="basic-bs.Navbar-bs.Nav" className="text-light">
             <bs.Nav className="mr-auto text-light">
-                <Link to='/Shop' className="nav-link text-light">
-                    Shop
-                </Link>
+                
+                <Toggle>{tog=><>
+                    <div onMouseEnter={tog.toggle} onMouseLeave={tog.toggle}>
+                        <Link to='/Shop' className="nav-link text-light">
+                            Shop
+                        </Link>
+                        <bs.Collapse in={tog.value} timeout={200}>
+                            <div>
+                                <div className="pl-3 my-over-flow">
+                                    <p>Lorem Ipsum</p>
+                                    <p>Sit Emit</p>
+                                    <p>Hello World</p>
+                                </div>
+                            </div>
+                        </bs.Collapse>
+                    </div>
+                </>}</Toggle>
+                
                 <Link to='/' className="nav-link text-light">
                     About
                 </Link>
                 <Link to='/Contact' className="nav-link text-light">
                     Contact
+                </Link>
+                <Link to='/FAQ' className="nav-link text-light">
+                    FAQ
                 </Link>
             </bs.Nav>
             <bs.Nav>

@@ -17,7 +17,8 @@ function Home(props) {
        <bs.Row >
             <bs.Col>
                 <h1>
-                    Research                     
+                <bs.Button onClick={e=>props.context.loadFakeData()}>push fake data</bs.Button>
+    Research                     
                 </h1>
                 
                 <p>
