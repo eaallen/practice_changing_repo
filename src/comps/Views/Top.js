@@ -24,16 +24,16 @@ function Top(props) {
             </bs.Nav>
             <bs.Nav>
                 <bs.NavDropdown title="User" id="basic-bs.Nav-dropdown" className="text-light" alignRight>
-                    <bs.NavDropdown.Item href="#action/3.1">Action</bs.NavDropdown.Item>
-                    <bs.NavDropdown.Item href="#action/3.2">Another action</bs.NavDropdown.Item>
-                    <bs.NavDropdown.Item href="#action/3.3">Something</bs.NavDropdown.Item>
+                    <bs.NavDropdown.Item>Action</bs.NavDropdown.Item>
+                    <bs.NavDropdown.Item>Another action</bs.NavDropdown.Item>
+                    <bs.NavDropdown.Item>Something</bs.NavDropdown.Item>
                     <bs.NavDropdown.Divider />
-                    <bs.NavDropdown.Item href="#action/3.4">
+                    <bs.NavDropdown.Item>
                         <Link to="/Authenticate">
                             Sign in
                         </Link>
                     </bs.NavDropdown.Item>
-                    <bs.NavDropdown.Item href="#action/3.4">
+                    <bs.NavDropdown.Item >
                         <Link to="/Authenticate" className="text-danger">
                             Sign out
                         </Link>

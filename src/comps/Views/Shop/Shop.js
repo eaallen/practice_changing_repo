@@ -13,10 +13,15 @@ class ShopBase extends React.Component{
     render(){
         return(
             <div>
+                <div className="text-center">
+                    <h1>
+                        The Shop
+                    </h1>
+                </div>
                 <bs.CardColumns>
                     {this.state.data.map(item=>{
                         return(
-                            <ItemCard title='Lorem' price='$23.33'id={item}/>
+                            <ItemCard title='Lorem' price='$23.33'id={item} key={item}/>
                         )
                     })}
                 </bs.CardColumns>
