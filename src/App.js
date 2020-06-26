@@ -10,6 +10,7 @@ import ScrollToTop from './constanst/ScrollTop';
 import Purchase from './comps/Views/Purchase';
 import Authenticate from './comps/Views/Authenticate'
 import Contact from './comps/Views/Contact'
+import Shop from './comps/Views/Shop/Shop'
 function App(props) {
   return (
     <div>
@@ -34,6 +35,9 @@ function App(props) {
                     </Route>
                     <Route path='/itemDetail/:id'>
                       <ItemDetail/>
+                    </Route>
+                    <Route path='/Shop'>
+                      <Shop/>
                     </Route>
                     <Route path='/Authenticate'>
                       <Authenticate/>

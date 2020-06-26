@@ -12,7 +12,7 @@ function Top(props) {
         <bs.Navbar.Toggle aria-controls="basic-bs.Navbar-bs.Nav" />
         <bs.Navbar.Collapse id="basic-bs.Navbar-bs.Nav" className="text-light">
             <bs.Nav className="mr-auto text-light">
-                <Link to='/' className="nav-link text-light">
+                <Link to='/Shop' className="nav-link text-light">
                     Shop
                 </Link>
                 <Link to='/' className="nav-link text-light">
