@@ -9,6 +9,7 @@ import ItemDetail from './comps/Views/ItemDetail';
 import ScrollToTop from './constanst/ScrollTop';
 import Purchase from './comps/Views/Purchase';
 import Authenticate from './comps/Views/Authenticate'
+import Contact from './comps/Views/Contact'
 function App(props) {
   return (
     <div>
@@ -26,7 +27,12 @@ function App(props) {
               <div style={{padding:'1rem'}}>
                 <ScrollToTop>
                   <Switch>
-                  <Route path='/itemDetail/:id'>
+                    <Route path='/Contact'>
+                      <Contact
+                        value="Alex"
+                      />
+                    </Route>
+                    <Route path='/itemDetail/:id'>
                       <ItemDetail/>
                     </Route>
                     <Route path='/Authenticate'>
