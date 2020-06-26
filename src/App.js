@@ -11,6 +11,7 @@ import Purchase from './comps/Views/Purchase';
 import Authenticate from './comps/Views/Authenticate'
 import Contact from './comps/Views/Contact'
 import Shop from './comps/Views/Shop/Shop'
+import ToolPage from './comps/Tools/toolpage';
 function App(props) {
   return (
     <div>
@@ -28,6 +29,9 @@ function App(props) {
               <div style={{paddingTop:"3.5rem"}}>
                 <ScrollToTop>
                   <Switch>
+                    <Route path='/Tool'>
+                      <ToolPage/>
+                    </Route>
                     <Route path='/Contact'>
                       <Contact
                         value="Alex"
