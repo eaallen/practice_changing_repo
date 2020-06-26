@@ -14,7 +14,7 @@ function App(props) {
   return (
     <div>
       <Router>
-      <bs.Container>
+      <bs.Container >
         <div className='text-dark'>
           <bs.Row noGutters>
             <bs.Col>
@@ -22,9 +22,9 @@ function App(props) {
             </bs.Col>
           </bs.Row>
         
-          <bs.Row >
+          <bs.Row noGutters>
             <bs.Col>
-              <div style={{padding:'1rem'}}>
+              <div style={{paddingTop:"3.5rem"}}>
                 <ScrollToTop>
                   <Switch>
                     <Route path='/Contact'>
