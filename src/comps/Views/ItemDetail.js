@@ -12,7 +12,7 @@ function ItemDetail(props) {
         <bs.Row>
             <bs.Col>
                 <div className='image-container'>
-                    <img className='image-detail' src={`/img/${id}.jpg`}/>
+                    <img className='image-detail' src={`/img/${id}.jpg`} alt=""/>
                 </div>
             </bs.Col>
             <bs.Col>

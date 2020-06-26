@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouteMatch, /*useHistory,*/Link} from "react-router-dom";
+import { useRouteMatch, /*useHistory,*/} from "react-router-dom";
 import PurchaseForm from '../Forms/Customer/PurchaseForm'
 function Purchase(props){
     const match = useRouteMatch('/purchase/:id')

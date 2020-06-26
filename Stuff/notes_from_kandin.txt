@@ -1,0 +1,3 @@
+CONTACT PAGE
+    * basic bootstrap form is good.  
+    * have a drop down so the user can select if it is a question, commet, etc. 

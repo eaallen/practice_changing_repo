@@ -1,6 +1,5 @@
 import React from 'react';
 import {withFirebase} from '../Firebase'
-import * as bs from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 function ItemCard(props) {
   return (
@@ -10,7 +9,7 @@ function ItemCard(props) {
               {props.title}
           </div>   
           <div className='card-body'>
-              <img className='image item_img' src={`/img/${props.id}.jpg`}/>            
+              <img className='image item_img' src={`/img/${props.id}.jpg`} alt=""/>            
           </div>   
           <div className='card-foot'>
               {props.price}

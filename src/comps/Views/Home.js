@@ -2,7 +2,6 @@ import React from 'react';
 import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
 import ShowCase from './ShowCase'
-let images = [1,2,3]
 function Home(props) {
     
   return (
@@ -10,7 +9,7 @@ function Home(props) {
         <bs.Row noGutters>
             <bs.Col className='text-center'>
                 <div className='home-img'>
-                    <img className='image' src={`/img/landscape/${100}.jpg`} />
+                    <img className='image' src={`/img/landscape/${100}.jpg`} alt=""/>
                     
                 </div>
             </bs.Col>
@@ -32,7 +31,7 @@ function Home(props) {
                     Predict
                 </h1>
                 <p>
-                Learn how a future GoFundME campaign might fair when published. Our Machine Learning algorithms take the parameters
+                    Learn how a future GoFundME campaign might fair when published. Our Machine Learning algorithms take the parameters
                     provided and return a predicted amount of donors and the total funds that could be raised.                     
                 </p>
             </bs.Col>
@@ -41,8 +40,8 @@ function Home(props) {
                     SandBox SQL
                 </h1>
                 <p>
-                Explore the data with an unlimited amount of possibilities. SandBox SQL gives you the freedom of writing SQL with out worrying about UPDATE, DROP, etc.
-                This is possible because SandBox SQL was purposely designed for data viewing only.                     
+                    Explore the data with an unlimited amount of possibilities. SandBox SQL gives you the freedom of writing SQL with out worrying about UPDATE, DROP, etc.
+                    This is possible because SandBox SQL was purposely designed for data viewing only.                     
                 </p>
             </bs.Col>
         </bs.Row> 
