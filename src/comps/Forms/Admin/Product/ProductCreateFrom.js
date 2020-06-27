@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import {withFirebase} from './../../../Firebase'
 class ProductCreateForm extends React.Component{
     constructor(props){
         super(props)

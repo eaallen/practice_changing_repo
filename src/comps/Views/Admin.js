@@ -1,7 +1,15 @@
 import React from 'react'
-import { Container,Row,Col } from 'react-bootstrap'
-import SignUpForm from '../Forms/Customer/SignUpForm'
-import { Link } from 'react-router-dom'
+// import { Container,Row,Col } from 'react-bootstrap'
+// import SignUpForm from '../Forms/Customer/SignUpForm'
+import { Link, useRouteMatch } from 'react-router-dom'
+import AdminProduct from '../Forms/Admin/Product'
+
+
+/**************************************************************************************************
+ * Admin uses a switch to display componenets 
+ * const form_type gets a value from the url
+ * Default component will be the home page for admin
+ ***************************************************************************************************/
 
 function Admin(props){
     const match = useRouteMatch('/Admin/:id')
@@ -9,9 +17,8 @@ function Admin(props){
 
     const form_switch = () =>{
         switch(form_type){
-            case "":
-            // return <Component>
-            break
+            case "Product":
+            return <AdminProduct/>
             case "":
             // return <Component>
             break
@@ -22,12 +29,12 @@ function Admin(props){
             // return <Component>
             break
             default:
-            // return <Component>
-            break
+            return <Default/>
         }
     }
     return(
         <div>
+            <Link to="/Admin/defualt">Admin Home</Link>
             {form_switch()}
         </div>
     )
@@ -35,10 +42,24 @@ function Admin(props){
 export default Admin
 
 
-const Defualt = (props) =>{
+const Default = (props) =>{
     return(
         <div>
-            <Link to="/Admin/Customer"></Link>
+            <div>
+                <Link to="/Admin/Customer">Customer</Link>
+            </div>
+            <div>
+                <Link to="/Admin/Product">Product</Link>
+            </div>
+            <div>
+                <Link to="/Admin/Customer">Customer</Link>
+            </div>
+            <div>
+                <Link to="/Admin/Customer">Customer</Link>
+            </div>
+            <div>
+                <Link to="/Admin/Customer">Customer</Link>
+            </div>
         </div>
     )
 }

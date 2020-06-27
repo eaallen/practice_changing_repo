@@ -40,6 +40,9 @@ function Top(props) {
                 <Link to='/FAQ' className="nav-link text-light">
                     FAQ
                 </Link>
+                <Link to='/Admin/defualt' className="nav-link text-light">
+                    Admin
+                </Link>
             </bs.Nav>
             <bs.Nav>
                 <bs.NavDropdown title="User" id="basic-bs.Nav-dropdown" className="text-light" alignRight>
