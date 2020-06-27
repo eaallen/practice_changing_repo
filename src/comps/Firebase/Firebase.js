@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
 import React from 'react' 
+import produce from 'immer'
 export const AppContext = React.createContext()
 
     const config = {
@@ -39,7 +40,7 @@ export const AppContext = React.createContext()
           this.state = {
             test:'this is comming from the firbase context provider',
             loading: null,
-            // user: null
+            products: null,
           }
           console.log('here')
           firebase.initializeApp(config);
@@ -77,6 +78,22 @@ export const AppContext = React.createContext()
         doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
         doAddRecord = (_collection) => this.db.collection(_collection).doc()
         doGetQueryRecord = (_collection, item_looking_for,filtering_item) => this.db.collection(_collection).where(item_looking_for, '==',filtering_item).get();
+        
+        doQueryAll = async(_collection) =>{
+          // get data from firebase and return as an array of objects
+          const querySnapshot = await this.db.collection(_collection).get()
+          let arr = []
+          //for each 'key:value pair' . . . 
+          for(const doc of querySnapshot.docs){
+            let data = doc.data();
+            data['id'] = doc.id;
+            data.task_history= []
+            arr.push(data)
+          }
+          // console.log(arr,"<<<<<<<")
+          return arr
+        } 
+        
         getOneRecord = (_collection, item_wanted) => this.db.collection(_collection).doc(item_wanted)
         checkState = async() =>{ await
           this.auth.onAuthStateChanged(function(user) {
@@ -114,9 +131,21 @@ export const AppContext = React.createContext()
         }
 
       async componentDidMount(){
-      // STUFF YOU DO RIGHT AT THE BEGINING 
+      // STUFF YOU DO RIGHT AT THE BEGINING
+        const info = await this.doQueryAll('product')
+        this.setState(state=> produce(state, draft=>{
+          draft.products = info
+        }))
       }
         render(){
+          console.log(this.state)
+          if(!this.state.products){
+            return(
+              <div>
+                loading...
+              </div>
+            )
+          }
           return(
             <AppContext.Provider value={{...this.state, ...this.actions }}>
               {this.props.children}
