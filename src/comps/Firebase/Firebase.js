@@ -36,6 +36,7 @@ export const AppContext = React.createContext()
             checkState: this.checkState,
             user: this.user,
             loadFakeData: this.loadFakeData,
+            doQueryAll: this.doQueryAll,
           }
           this.state = {
             test:'this is comming from the firbase context provider',
@@ -85,12 +86,16 @@ export const AppContext = React.createContext()
           let arr = []
           //for each 'key:value pair' . . . 
           for(const doc of querySnapshot.docs){
-            let data = doc.data();
-            data['id'] = doc.id;
-            data.task_history= []
-            arr.push(data)
+            let unordered = doc.data();
+            unordered['id'] = doc.id;
+            // data.task_history= []
+            const ordered ={}
+            Object.keys(unordered).sort().forEach(function(key) {
+              ordered[key] = unordered[key];
+            });
+            arr.push(ordered)
           }
-          // console.log(arr,"<<<<<<<")
+          console.log(arr,"<<<<<<<")
           return arr
         } 
         
