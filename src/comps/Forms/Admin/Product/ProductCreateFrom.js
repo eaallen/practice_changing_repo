@@ -14,60 +14,71 @@ class ProductCreateForm extends React.Component{
         return(
             <div>
                 <Form>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="availableSize">
+                        <Form.Label>Available Size:</Form.Label>
+                            <Form.Control as="select" multiple>
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </Form.Control>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                        <Form.File id="selectImage" label="Select Image" />  
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="productCatagory">
+                        <Form.Label>Catagory</Form.Label>
+                            <Form.Control as="select">
+                            <option>Men</option>
+                            <option>Women</option>
+                            <option>Children</option>
+                            </Form.Control>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="productColor">
+                        <Form.Label>Color</Form.Label>
+                        <Form.Control type="text" placeholder="Red, Blue, Yellow, etc." />
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="currentSize">
+                        <Form.Label>Product Current Size:</Form.Label>
+                            <Form.Control as="select">
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </Form.Control>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Check 
+                        type="switch"
+                        id="productCustomize"
+                        label="Can size be adjusted?"
+                    />
+                    <Form.Group controlId="productDescription">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control as="textarea" rows="3" />
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="productName">
+                        <Form.Label>Name of Product</Form.Label>
+                        <Form.Control type="text"/>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Group controlId="productPrice">
+                        <Form.Label>Products Price</Form.Label>
+                        <Form.Control type="number" placeholder="$"/>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                        />
+                    <Form.Check 
+                        type="switch"
+                        id="productReserved"
+                        label="Is product reserved?"
+                    />
+                    <Form.Group controlId="productType">
+                        <Form.Label>Product Type</Form.Label>
+                            <Form.Control as="select">
+                            <option>Shirt</option>
+                            <option>Pants</option>
+                            <option>Dress</option>
+                            <option>Sandles</option>
+                            </Form.Control>
                     </Form.Group>
                 </Form>
             </div>
