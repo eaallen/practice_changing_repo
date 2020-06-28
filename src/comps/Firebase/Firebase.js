@@ -138,7 +138,7 @@ export const AppContext = React.createContext()
         }))
       }
         render(){
-          console.log(this.state)
+          console.log("STATE OF CONTEXT",this.state)
           if(!this.state.products){
             return(
               <div>
