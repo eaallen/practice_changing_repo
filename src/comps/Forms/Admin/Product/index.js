@@ -5,6 +5,7 @@ import { withFirebase } from '../../../Firebase'
 import * as bs from 'react-bootstrap'
 import produce from 'immer'
 import ProductDeleteForm from './ProductDeleteForm'
+import ModalForm from '../../../Tools/ModalForm'
 
 class AdminProduct extends React.Component{
     constructor(props){
@@ -13,6 +14,7 @@ class AdminProduct extends React.Component{
             products:null, // an array of objects
             action:"create",
             product:null,  // a single object
+            modal_on:false
         }
     }
     componentDidMount = async() =>{
@@ -20,10 +22,12 @@ class AdminProduct extends React.Component{
         const info2 = info
         this.setState(state=> produce(state, draft=>{
           draft.products = info2
+          draft.modal_on = false
         }))
     }
 
     action_on_product = (product_obj,type_of_action) =>{
+        this.handle_modal()
         if(type_of_action === "edit"){
             this.setState({action:"edit", product:product_obj})
         }else{
@@ -33,23 +37,31 @@ class AdminProduct extends React.Component{
     form_switch = (action) =>{
         switch(action){
             case "edit":
-            return <ProductUpdateFrom data={this.state.product}/>
+            return <ProductUpdateFrom product={this.state.product} show_change={()=>this.componentDidMount()}/>
             case "delete":
-            return <ProductDeleteForm data={this.state.product}/>
-            default:
-            return <ProductCreateFrom/>
+            return <ProductDeleteForm product={this.state.product} show_change={()=>this.componentDidMount()}/>
+            // default:
+            // return <ProductCreateFrom/>
         }
     }
-
+    handle_modal = () =>{
+        this.setState(state=> produce(state, draft=>{
+            draft.modal_on = !draft.modal_on
+          }))
+    }
 
     render(){
         console.log(this.state.products,"products")
+        
         return(
             <div>
                 <div>
                     {/* <h3>Create Product</h3> */}
+                    <ProductCreateFrom/>
+                    <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()}>
+                        {this.form_switch(this.state.action)}    
+                    </ModalForm>
                     
-                    {this.form_switch(this.state.action)}
                 </div>
                 {
                     !this.state.products?
@@ -63,9 +75,9 @@ class AdminProduct extends React.Component{
                                     <th>Actions</th>
                                     {Object.keys(this.state.products[0]).map((prod_col, idx) =>{
                                         return(
-                                           <th key ={idx}>
+                                        <th key ={idx}>
                                                 {prod_col}
-                                           </th> 
+                                        </th> 
                                         )
                                     })}
                                 </tr>

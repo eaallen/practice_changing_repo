@@ -37,6 +37,8 @@ export const AppContext = React.createContext()
             user: this.user,
             loadFakeData: this.loadFakeData,
             doQueryAll: this.doQueryAll,
+            doDeleteOneRecord: this.doDeleteOneRecord,
+
           }
           this.state = {
             test:'this is comming from the firbase context provider',
@@ -99,6 +101,17 @@ export const AppContext = React.createContext()
           return arr
         } 
         
+        doDeleteOneRecord = async(_collection, _doc) =>{
+          let success = false
+          this.db.collection(_collection).doc(_doc).delete().then(()=>{
+            console.log("it is deleted")
+            success=true
+            this.setState({deleted_one_record:success})
+          }).catch(error=>{
+            console.error(error)
+          })
+        }
+
         getOneRecord = (_collection, item_wanted) => this.db.collection(_collection).doc(item_wanted)
         checkState = async() =>{ await
           this.auth.onAuthStateChanged(function(user) {
