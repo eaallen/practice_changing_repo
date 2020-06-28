@@ -58,7 +58,7 @@ class AdminProduct extends React.Component{
                 <div>
                     {/* <h3>Create Product</h3> */}
                     <ProductCreateFrom/>
-                    <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()}>
+                    <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()} title={this.state.action}>
                         {this.form_switch(this.state.action)}    
                     </ModalForm>
                     

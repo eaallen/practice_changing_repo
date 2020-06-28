@@ -12,7 +12,7 @@ const ModalForm = (props) =>{
         >
             <Modal.Header closeButton>
                 <Modal.Title id="example-modal-sizes-title-sm">
-                    Delete
+                   {props.title.toUpperCase()}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

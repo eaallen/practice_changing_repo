@@ -13,9 +13,9 @@ class ProductUpdateForm extends React.Component{
         console.log("state of ProductUpdateForm{}",this.state)
         return(
             <div>
-                <h3>
-                    Update product {this.props.product.product_name}  ({this.props.product.id})
-                </h3>
+                <p>
+                    Update product <strong>{this.props.product.product_name}</strong>  ({this.props.product.id})
+                </p>
                 {/* JSX here */}
             </div>
         )

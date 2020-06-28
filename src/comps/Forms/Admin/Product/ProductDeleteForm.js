@@ -19,9 +19,9 @@ class ProductDeleteForm extends React.Component{
     render(){
         return(
             <div>
-                <h3>
-                    Do you really want to delete {this.props.product.product_name} ({this.props.product.id}) ?
-                </h3>
+                <p>
+                    Do you really want to delete <strong>{this.props.product.product_name}</strong> ({this.props.product.id}) ?
+                </p>
                 <Button variant="outline-danger" onClick={e=>this.handle_delete()}>YES</Button> &nbsp;
             </div>
         )
