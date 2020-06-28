@@ -24,6 +24,7 @@ class AdminProduct extends React.Component{
     }
 
     action_on_product = (product_obj,type_of_action) =>{
+        window.scrollTo(0, 0) // puts us to the top of the window when this function is fired 
         if(type_of_action === "edit"){
             this.setState({action:"edit", product:product_obj})
         }else{
@@ -31,11 +32,12 @@ class AdminProduct extends React.Component{
         }
     }
     form_switch = (action) =>{
+        
         switch(action){
             case "edit":
-            return <ProductUpdateFrom data={this.state.product}/>
+            return <ProductUpdateFrom product={this.state.product}/>
             case "delete":
-            return <ProductDeleteForm data={this.state.product}/>
+            return <ProductDeleteForm product={this.state.product}/>
             default:
             return <ProductCreateFrom/>
         }
@@ -44,6 +46,7 @@ class AdminProduct extends React.Component{
 
     render(){
         console.log(this.state.products,"products")
+        
         return(
             <div>
                 <div>
@@ -63,9 +66,9 @@ class AdminProduct extends React.Component{
                                     <th>Actions</th>
                                     {Object.keys(this.state.products[0]).map((prod_col, idx) =>{
                                         return(
-                                           <th key ={idx}>
+                                        <th key ={idx}>
                                                 {prod_col}
-                                           </th> 
+                                        </th> 
                                         )
                                     })}
                                 </tr>
