@@ -17,7 +17,7 @@ class ProductDeleteForm extends React.Component{
                 <h3>
                     Do you really want to delete {this.props.product.product_name} ({this.props.product.id}) ?
                 </h3>
-                <Button variant="outline-danger">YES</Button> &nbsp;
+                <Button variant="outline-danger" onClick={e=>this.props.context.doDeleteOneRecord("product",this.props.product.id)}>YES</Button> &nbsp;
                 <Button variant="outline-info">NO</Button>
             </div>
         )

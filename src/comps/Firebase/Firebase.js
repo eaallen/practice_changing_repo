@@ -37,7 +37,8 @@ export const AppContext = React.createContext()
             user: this.user,
             loadFakeData: this.loadFakeData,
             doQueryAll: this.doQueryAll,
-            doDeleteOneRecord: deleteOneRecord,
+            doDeleteOneRecord: this.doDeleteOneRecord,
+
           }
           this.state = {
             test:'this is comming from the firbase context provider',
