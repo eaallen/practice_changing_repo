@@ -86,12 +86,16 @@ export const AppContext = React.createContext()
           let arr = []
           //for each 'key:value pair' . . . 
           for(const doc of querySnapshot.docs){
-            let data = doc.data();
-            data['id'] = doc.id;
-            data.task_history= []
-            arr.push(data)
+            let unordered = doc.data();
+            unordered['id'] = doc.id;
+            // data.task_history= []
+            const ordered ={}
+            Object.keys(unordered).sort().forEach(function(key) {
+              ordered[key] = unordered[key];
+            });
+            arr.push(ordered)
           }
-          // console.log(arr,"<<<<<<<")
+          console.log(arr,"<<<<<<<")
           return arr
         } 
         
