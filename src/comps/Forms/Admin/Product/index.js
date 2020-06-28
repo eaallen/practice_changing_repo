@@ -4,7 +4,6 @@ import ProductUpdateFrom from './ProductUpdateFrom'
 import { withFirebase } from '../../../Firebase'
 import * as bs from 'react-bootstrap'
 import produce from 'immer'
-import { Link } from 'react-router-dom'
 import ProductDeleteForm from './ProductDeleteForm'
 
 class AdminProduct extends React.Component{
@@ -13,7 +12,7 @@ class AdminProduct extends React.Component{
         this.state ={
             products:null, // an array of objects
             action:"create",
-            product:"create",  // a single object
+            product:null,  // a single object
         }
     }
     componentDidMount = async() =>{
