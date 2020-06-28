@@ -1,5 +1,6 @@
 import React from 'react'
-import Product from '.'
+import { withFirebase } from "../../../Firebase"
+
 class ProductDeleteForm extends React.Component{
     constructor(props){
         super(props)

@@ -13,7 +13,7 @@ class AdminProduct extends React.Component{
         this.state ={
             products:null, // an array of objects
             action:"create",
-            product:null,  // a single object
+            product:"create",  // a single object
         }
     }
     componentDidMount = async() =>{
@@ -48,9 +48,9 @@ class AdminProduct extends React.Component{
         return(
             <div>
                 <div>
-                    <h3>Create Product</h3>
+                    {/* <h3>Create Product</h3> */}
                     
-
+                    {this.form_switch(this.state.action)}
                 </div>
                 {
                     !this.state.products?
@@ -76,8 +76,8 @@ class AdminProduct extends React.Component{
                                     return(
                                         <tr key={prod.id} className="table-data">
                                             <td className="text-center">
-                                                <bs.Button to="/Admin/Edit" onClick={}>EDIT</bs.Button> <br/><br/>
-                                                <bs.Button to="/Admin/Delete">DELETE</bs.Button>
+                                                <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_product(prod,"edit")}>EDIT</bs.Button> <br/><br/>
+                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_product(prod,"delete")}>DELETE</bs.Button>
                                             </td>
                                             {Object.entries(prod).map((item,i)=>{
                                                 return(
