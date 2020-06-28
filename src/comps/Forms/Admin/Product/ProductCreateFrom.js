@@ -14,8 +14,8 @@ class ProductCreateForm extends React.Component{
         return(
             <div>
                 <Row>
-                    <Col lg={4}/>
-                    <Col lg={4}>
+                    <Col lg={2}/>
+                    <Col lg={8}>
                         <Form>
                             <Form.Group controlId="productName">
                                 <Form.Label>Name of Product</Form.Label>
@@ -116,7 +116,7 @@ class ProductCreateForm extends React.Component{
 
                         </Form>
                     </Col>
-                    <Col lg={4}/> 
+                    <Col lg={2}/> 
                 </Row>
             </div>
         )
