@@ -102,8 +102,11 @@ export const AppContext = React.createContext()
         } 
         
         doDeleteOneRecord = async(_collection, _doc) =>{
+          let success = false
           this.db.collection(_collection).doc(_doc).delete().then(()=>{
             console.log("it is deleted")
+            success=true
+            this.setState({deleted_one_record:success})
           }).catch(error=>{
             console.error(error)
           })
