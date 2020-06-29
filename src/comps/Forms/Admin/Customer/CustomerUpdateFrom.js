@@ -1,6 +1,6 @@
 import { withFirebase } from "../../../Firebase"
 import React from 'react'
-class ProductUpdateForm extends React.Component{
+class CustomerUpdateForm extends React.Component{
     constructor(props){
         super(props)
         
@@ -10,15 +10,15 @@ class ProductUpdateForm extends React.Component{
     }
 
     render(){
-        console.log("state of ProductUpdateForm{}",this.state)
+        console.log("state of CustomerUpdateForm{}",this.state)
         return(
             <div>
                 <p>
-                    Update product <strong>{this.props.product.product_name}</strong>  ({this.props.product.id})
+                    Update <strong>{this.props.customer.customer_email}</strong> ({this.props.customer.id})
                 </p>
                 {/* JSX here */}
             </div>
         )
     }
 }
-export default withFirebase(ProductUpdateForm)
+export default withFirebase(CustomerUpdateForm)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Row, Col } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
-class ProductCreateForm extends React.Component{
+class CustomerCreateForm extends React.Component{
     constructor(props){
         super(props)
         
@@ -122,4 +122,4 @@ class ProductCreateForm extends React.Component{
         )
     }
 }
-export default withFirebase(ProductCreateForm)
+export default withFirebase(CustomerCreateForm)

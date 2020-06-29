@@ -3,7 +3,7 @@ import { withFirebase } from "../../../Firebase"
 import { Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
-class ProductDeleteForm extends React.Component{
+class CustomerDeleteForm extends React.Component{
     constructor(props){
         super(props)
         
@@ -20,11 +20,11 @@ class ProductDeleteForm extends React.Component{
         return(
             <div>
                 <p>
-                    Do you really want to delete <strong>{this.props.product.product_name}</strong> ({this.props.product.id}) ?
+                    Do you really want to delete <strong>{this.props.customer.customer_email}</strong> ({this.props.customer.id}) ?
                 </p>
                 <Button variant="outline-danger" onClick={e=>this.handle_delete()}>YES</Button> &nbsp;
             </div>
         )
     }
 }
-export default withRouter(withFirebase(ProductDeleteForm))
+export default withRouter(withFirebase(CustomerDeleteForm))
