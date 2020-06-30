@@ -1,6 +1,7 @@
 import { withFirebase } from "../../../Firebase"
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
+import produce from 'immer'
 class ProductUpdateForm extends React.Component{
     constructor(props){
         super(props)
@@ -25,10 +26,15 @@ class ProductUpdateForm extends React.Component{
         this.setState({[e.target.name]:e.target.value})
     }
     avaliable_sizes(e){
-      //  let arr = []
-
-        // console.log(e.target.value)
-        // this.setState({[e.target.name]:e.target.value})
+        const val = e.target.value
+        this.setState(state=> produce(state, draft=>{
+            if(draft.avaliable_sizes.indexOf(val)<0){
+                draft.avaliable_sizes.push(val)
+            }else{
+                const idx = draft.avaliable_sizes.indexOf(val)
+                draft.avaliable_sizes.splice(idx,1)
+            }
+        }))
     }
     render(){
         console.log("state of ProductUpdateForm{}",this.state)
