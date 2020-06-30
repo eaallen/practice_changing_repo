@@ -16,7 +16,7 @@ class CustomerUpdateForm extends React.Component{
                 <p>
                     Update <strong>{this.props.customer.customer_email}</strong> ({this.props.customer.id})
                 </p>
-                {/* JSX here */}
+                {/* JSX here  form here*/}
             </div>
         )
     }
