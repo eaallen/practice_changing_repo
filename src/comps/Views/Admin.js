@@ -3,6 +3,7 @@ import React from 'react'
 // import SignUpForm from '../Forms/Customer/SignUpForm'
 import { Link, useRouteMatch } from 'react-router-dom'
 import AdminProduct from '../Forms/Admin/Product'
+import AdminCustomer from '../Forms/Admin/Customer'
 
 
 /**************************************************************************************************
@@ -19,9 +20,8 @@ function Admin(props){
         switch(form_type){
             case "Product":
             return <AdminProduct/>
-            case "":
-            // return <Component>
-            break
+            case "Customer":
+            return <AdminCustomer/>
             case "":
             // return <Component>
             break
