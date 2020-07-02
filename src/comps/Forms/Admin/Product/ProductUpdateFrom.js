@@ -10,7 +10,7 @@ class ProductUpdateForm extends React.Component{
             //  key:value
             product_name:this.props.product.product_name,
             product_description:this.props.product.product_description,
-            // image_name
+            image_name: 1,
             product_color:this.props.product.product_color,
             product_price:this.props.product.product_price,
             product_catagory:this.props.product.product_catagory,
@@ -18,7 +18,7 @@ class ProductUpdateForm extends React.Component{
             avaliable_sizes:this.props.product.avaliable_sizes,
             product_current_size:this.props.product.product_current_size,
             product_reserved:this.props.product.product_reserved,
-            product_customize:this.props.product_customize
+            product_customize:this.props.product_customize || false
         }
     }
     handleChange(e){
@@ -36,6 +36,11 @@ class ProductUpdateForm extends React.Component{
             }
         }))
     }
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        console.log("submit!!", this.state, this.props.product.id)
+        this.props.context.doUpdateOneRecord("product", this.state, this.props.product.id) // collection, obj, id
+    }
     render(){
         console.log("state of ProductUpdateForm{}",this.state)
         return(
@@ -46,7 +51,7 @@ class ProductUpdateForm extends React.Component{
                 <Row>
                     <Col lg={2}/>
                     <Col lg={8}>
-                        <Form>
+                        <Form onSubmit={e=>this.handleSubmit(e)}>
                             <Form.Group controlId="productName">
                                 <Form.Label>Name of Product</Form.Label>
                                 <Form.Control 
@@ -172,20 +177,18 @@ class ProductUpdateForm extends React.Component{
                             </Row>
 
                             <Form.Check 
-                                    type="switch"
                                     id="productReserved"
                                     label="Is product reserved?"
                                     name="product_reserved"
-                                    value={this.state.product_reserved} 
+                                    checked={this.state.product_reserved} 
                                     onChange={e => this.handleChange(e)}
                                     />
 
                             <Form.Check 
-                                type="switch"
                                 id="productCustomize"
                                 label="Can size be adjusted?"
                                 name="product_customize"
-                                value={this.state.product_customize} 
+                                checked={this.state.product_customize} 
                                 onChange={e => this.handleChange(e)}
                             />
 

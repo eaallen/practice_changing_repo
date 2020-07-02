@@ -39,6 +39,7 @@ export const AppContext = React.createContext()
             doQueryAll: this.doQueryAll,
             doDeleteOneRecord: this.doDeleteOneRecord,
             doCreateOneRecord: this.doCreateOneRecord,
+            doUpdateOneRecord: this.doUpdateOneRecord,
           }
           this.state = {
             test:'this is comming from the firbase context provider',
@@ -112,10 +113,20 @@ export const AppContext = React.createContext()
           })
         }
         doCreateOneRecord = async(_collection, obj) =>{
-          obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())
+          if(_collection==="product"){obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())}
           let success = false
           await this.db.collection(_collection).add(obj).then(()=>{
             console.log("it is deleted")
+            success=true
+          }).catch(error=>{
+            console.error(error)
+          })
+          return success
+        }
+        doUpdateOneRecord = async(_collection, obj, id) =>{
+          if(_collection==="product"){obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())} // move this to point of create
+          let success = false
+          await this.db.collection(_collection).doc(id).set(obj).then(()=>{
             success=true
           }).catch(error=>{
             console.error(error)
