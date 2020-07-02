@@ -36,6 +36,11 @@ class ProductUpdateForm extends React.Component{
             }
         }))
     }
+    handleSubmit = (e) =>{
+        e.preventDefault()
+
+        this.props.context.doUpdateOneRecord("product", this.state, this.props.product.id) // collection, obj, id
+    }
     render(){
         console.log("state of ProductUpdateForm{}",this.state)
         return(
@@ -46,7 +51,7 @@ class ProductUpdateForm extends React.Component{
                 <Row>
                     <Col lg={2}/>
                     <Col lg={8}>
-                        <Form>
+                        <Form onSubmit={e=>this.handleSubmit(e)}>
                             <Form.Group controlId="productName">
                                 <Form.Label>Name of Product</Form.Label>
                                 <Form.Control 
