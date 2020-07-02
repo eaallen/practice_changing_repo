@@ -7,24 +7,32 @@ class ProductCreateForm extends React.Component{
         super(props)
         
          this.state = {
-        //     bool: true
             product_name:"",
             product_description:"",
-            //image_name:"",
+            image_name:7,
             product_color:"",
             product_price:"",
             product_catagory:"",
             product_type:"",
             avaliable_sizes:[],
             product_current_size:"",
-            product_reserved:"",
-            product_customize:""
+            product_reserved:"false",
+            product_customize:"false"
          }
     }
 
     handleChange(e){
-        console.log(e.target)
-        this.setState({[e.target.name]:e.target.value})
+        console.log(e.target.id ,"handle change")
+        let id = e.target.id
+        let val = e.target.value
+        if(id === 'productCustomize' || id === 'productReserved'){
+            if(val === "true"){
+                val = true
+            }else{
+                val = false
+            }
+        }
+        this.setState({[e.target.name]:val})
     }
     
     avaliable_sizes(e){
@@ -38,14 +46,18 @@ class ProductCreateForm extends React.Component{
             }
         }))
     }
-
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        this.props.context.doCreateOneRecord('product',this.state)
+    }
     render(){
+        console.log("STATE", this.state)
         return(
             <div>
                 <Row>
                     <Col lg={2}/>
                     <Col lg={8}>
-                        <Form>
+                        <Form onSubmit={e=>this.handleSubmit(e)}>
                             <Form.Group controlId="productName">
                                 <Form.Label>Name of Product</Form.Label>
                                 <Form.Control 
@@ -53,6 +65,7 @@ class ProductCreateForm extends React.Component{
                                     name="product_name"
                                     value={this.state.product_name}
                                     onChange={e => this.handleChange(e)}
+                                    required
                                 />
                             </Form.Group>
 
@@ -63,18 +76,17 @@ class ProductCreateForm extends React.Component{
                                     name="product_description"
                                     value={this.state.product_description}
                                     onChange={e => this.handleChange(e)}
+                                    required
                                 />
                             </Form.Group>
                             
-                            
-                                
                                     <Form.Group>
                                         <Form.File 
                                             id="selectImage" 
                                             label="Select Image" 
                                             name="image_name"
                                             onChange={e => this.handleChange(e)}
-                                        />  
+                                            />  
                                     </Form.Group>
                                 
                             <Row>
@@ -87,7 +99,8 @@ class ProductCreateForm extends React.Component{
                                             name="product_color"
                                             value={this.state.product_color}
                                             onChange={e => this.handleChange(e)}
-                                        />
+                                            required
+                                            />
                                     </Form.Group>
                                 </Col>
 
@@ -100,7 +113,8 @@ class ProductCreateForm extends React.Component{
                                             name="product_price"
                                             value={this.state.product_price}
                                             onChange={e => this.handleChange(e)}
-                                        />
+                                            required
+                                            />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -114,7 +128,7 @@ class ProductCreateForm extends React.Component{
                                                 name="product_catagory"
                                                 value={this.state.product_catagory}
                                                 onChange={e => this.handleChange(e)}
-                                            >
+                                                >
                                             <option>Men</option>
                                             <option>Women</option>
                                             <option>Children</option>
@@ -150,6 +164,7 @@ class ProductCreateForm extends React.Component{
                                                 name="avaailable_sizes"
                                                 value={this.state.available_size}
                                                 onChange={e => this.avaliable_sizes(e)}
+                                                required
                                             >
                                                 <option value="xs">XS</option>
                                                 <option value="s">S</option>
@@ -180,7 +195,7 @@ class ProductCreateForm extends React.Component{
                             </Row>
 
                             <Form.Check 
-                                type="switch"
+                                // type="switch"
                                 id="productReserved"
                                 label="Is product reserved?"
                                 name="product_reserved"
@@ -189,11 +204,12 @@ class ProductCreateForm extends React.Component{
                             />
 
                             <Form.Check 
-                                type="switch"
+                                // type="switch"
                                 id="productCustomize"
                                 label="Can size be adjusted?"
                                 name="product_customize"
-                                value={this.state.product_customize}
+                                // value={this.state.product_customize}
+                                value={true}
                                 onChange={e => this.handleChange(e)}
                             />
                             
