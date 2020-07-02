@@ -1,13 +1,20 @@
 import React from 'react'
-import { Form, Row, Col } from 'react-bootstrap'
+import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
 class CustomerCreateForm extends React.Component{
     constructor(props){
         super(props)
         
-        // this.state = {
-        //     bool: true
-        // }
+        this.state = {
+            // bool: true
+            customer_email:"",
+            customer_size:""
+        }
+    }
+
+    handleChange(e){
+        console.log(e.target)
+        this.setState({[e.target.name]:e.target.value})
     }
 
     render(){
@@ -17,24 +24,40 @@ class CustomerCreateForm extends React.Component{
                     <Col lg={2}/>
                     <Col lg={8}>
                         <Form>
-                            <Form.Group controlId="cusomerEmail">
+                            <Form.Group controlId="customerEmail">
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control type="email"
-                                    placeholder="Enter email: xample@mail.com"
+                                    placeholder="xample@mail.com"
+                                    required
+                                    name="customer_email"
+                                    value={this.state.customer_email}
+                                    onChange={e => this.handleChange(e)}
                             />
                             </Form.Group>
 
 
                             <Row>
                                 <Col lg={6}>
-                                    <Form.Group controlId="productCatagory">
-                                        <Form.Label>Catagory</Form.Label>
-                                            <Form.Control as="select">
-                                            <option>Men</option>
-                                            <option>Women</option>
-                                            <option>Children</option>
+                                    <Form.Group controlId="customerSize">
+                                        <Form.Label>Select Size</Form.Label>
+                                            <Form.Control 
+                                                as="select"
+                                                name="customer_size"
+                                                value={this.state.customer_size}
+                                                onChange={e => this.handleChange(e)}
+                                            >
+                                                <option>XXS</option>
+                                                <option>XS</option>
+                                                <option>S</option>
+                                                <option>M</option>
+                                                <option>L</option>
+                                                <option>XL</option>
                                             </Form.Control>
                                     </Form.Group>
+
+                                    <Button variant="primary" type="submit">
+                                        Submit
+                                    </Button>
                                 </Col>
                             </Row>
                         </Form>
