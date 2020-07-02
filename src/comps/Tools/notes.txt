@@ -1,3 +1,30 @@
+FOR ALEX------------------------------------------------
+
+{
+  xs: true,
+  s: false, 
+  m: true, 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 +++++++++++++ PRODUCT DATA +++++++++++++
           const col =  ['product_name','product_date','product_customize','product_description','product_current_size','product_price','product_color','product_type','product_reserved','product_category','avaliable_sizes','image_name']
           const data = [

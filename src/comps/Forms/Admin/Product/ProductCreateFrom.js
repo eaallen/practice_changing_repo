@@ -16,7 +16,7 @@ class ProductCreateForm extends React.Component{
             product_price:0.00,
             product_catagory:"Men",
             product_type:"Shirt",
-            avaliable_sizes:[],
+            avaliable_sizes:{xs:false, s:false},
             product_current_size:"XS",
             product_reserved:"false",
             product_customize:"false"
@@ -181,7 +181,7 @@ class ProductCreateForm extends React.Component{
                                     <Form.Group controlId="avaliableSize">
                                         <Form.Label>Available Size:</Form.Label>
 
-                                            <MultiSelect opt={["xs","s","m","l","xl"]} avaliable_sizes={this.avaliable_sizes}/>
+                                            <MultiSelect opt={["xs","s","m","l","xl"]} avaliable_sizes={this.avaliable_sizes} val ={this.state.avaliable_sizes}/>
 
                                             <Form.Control 
                                                 as="select" 

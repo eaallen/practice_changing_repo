@@ -19,7 +19,7 @@ export default class MultiSelect extends React.Component{
                 {this.props.opt.map(item=>{
                     return(
                         <div key={item}>
-                            <input type="checkbox" name={item} onChange={e=> this.handleChange(e)}/> {item.toUpperCase()}
+                            <input type="checkbox" name={item} checked={false} onChange={e=> this.handleChange(e)}/> {item.toUpperCase()}
                         </div>
                     )
                 })}
