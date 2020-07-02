@@ -1,15 +1,14 @@
+import { withFirebase } from "../../../Firebase"
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import {withFirebase} from '../../../Firebase'
-import AddressCreateFrom from '../Address/AddressCreateFrom'
-class CustomerCreateForm extends React.Component{
+class AddressUpdateForm extends React.Component{
     constructor(props){
         super(props)
         
         this.state = {
-            // bool: true
-            customer_email:"",
-            customer_size:"XXS"
+            //  key:value
+            customer_email:this.props.customer.customer_email,
+            customer_size:this.props.customer.customer_size
         }
     }
 
@@ -19,8 +18,12 @@ class CustomerCreateForm extends React.Component{
     }
 
     render(){
+        console.log("state of AddressUpdateForm{}",this.state)
         return(
             <div>
+                <p>
+                    Update <strong>{this.props.customer.customer_email}</strong> ({this.props.customer.id})
+                </p>
                 <Row>
                     <Col lg={2}/>
                     <Col lg={8}>
@@ -38,7 +41,7 @@ class CustomerCreateForm extends React.Component{
 
 
                             <Row>
-                                <Col lg={2}>
+                                <Col lg={6}>
                                     <Form.Group controlId="customerSize">
                                         <Form.Label>Select Size</Form.Label>
                                             <Form.Control 
@@ -56,13 +59,11 @@ class CustomerCreateForm extends React.Component{
                                             </Form.Control>
                                     </Form.Group>
 
+                                    <Button variant="primary" type="submit">
+                                        Submit
+                                    </Button>
                                 </Col>
                             </Row>
-                            <AddressCreateFrom/>
-
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
                         </Form>
                     </Col>
                     <Col lg={2}/> 
@@ -71,4 +72,4 @@ class CustomerCreateForm extends React.Component{
         )
     }
 }
-export default withFirebase(CustomerCreateForm)
+export default withFirebase(AddressUpdateForm)

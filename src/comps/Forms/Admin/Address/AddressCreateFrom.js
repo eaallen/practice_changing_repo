@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
-import AddressCreateFrom from '../Address/AddressCreateFrom'
-class CustomerCreateForm extends React.Component{
+class AddressCreateForm extends React.Component{
     constructor(props){
         super(props)
         
@@ -22,11 +21,11 @@ class CustomerCreateForm extends React.Component{
         return(
             <div>
                 <Row>
-                    <Col lg={2}/>
-                    <Col lg={8}>
+                    {/* <Col lg={2}/>
+                    <Col lg={8}> */}
                         <Form>
                             <Form.Group controlId="customerEmail">
-                                <Form.Label>Email:</Form.Label>
+                                <Form.Label>Address 1</Form.Label>
                                 <Form.Control type="email"
                                     placeholder="xample@mail.com"
                                     required
@@ -38,9 +37,9 @@ class CustomerCreateForm extends React.Component{
 
 
                             <Row>
-                                <Col lg={2}>
+                                <Col>
                                     <Form.Group controlId="customerSize">
-                                        <Form.Label>Select Size</Form.Label>
+                                        <Form.Label>Select State</Form.Label>
                                             <Form.Control 
                                                 as="select"
                                                 name="customer_size"
@@ -55,20 +54,14 @@ class CustomerCreateForm extends React.Component{
                                                 <option>XL</option>
                                             </Form.Control>
                                     </Form.Group>
-
                                 </Col>
                             </Row>
-                            <AddressCreateFrom/>
-
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
                         </Form>
-                    </Col>
-                    <Col lg={2}/> 
+                    {/* </Col> */}
+                    {/* <Col lg={2}/>  */}
                 </Row>
             </div>
         )
     }
 }
-export default withFirebase(CustomerCreateForm)
+export default withFirebase(AddressCreateForm)
