@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from './../../../Firebase'
 import produce from 'immer'
+import MultiSelect from '../../../Tools/MultiSelect'
 let arr =[]
 class ProductCreateForm extends React.Component{
     constructor(props){
@@ -22,8 +23,9 @@ class ProductCreateForm extends React.Component{
          }
     }
 
-    handleChange(e){
-        console.log(e.target.id ,"handle change")
+    handleChange = (e) =>{
+        // console.log(e.target.id ,"handle change")
+        console.log(this ,"handle change")
         let id = e.target.id
         let val = e.target.value
         if(id === 'productCustomize' || id === 'productReserved'){
@@ -35,20 +37,36 @@ class ProductCreateForm extends React.Component{
         }
         this.setState({[e.target.name]:val})
     }
-    
-    avaliable_sizes(e){
-        const val = e.target.value
+    prac = (e) =>{
+        this.setState({prac:e.target.name})
+    }
+    avaliable_sizes = (value,name) => {
+        const val = value
+
+        if(val){
+            this.setState(state=> produce(state, draft=>{
+                draft.avaliable_sizes.push(name)
+            }))
+        }else{
+            // const idx = this.state.avaliable_sizes.indexOf(name)
+            let arr = []
+
+            this.setState(state=> produce(state, draft=>{
+                draft.avaliable_sizes = arr
+            })) 
+        }
+
 
         console.log("val", val)
-        
-        this.setState(state=> produce(state, draft=>{
-            if(draft.avaliable_sizes.indexOf(val)<0){
-                draft.avaliable_sizes.push(val)
-            }else{
-                const idx = draft.avaliable_sizes.indexOf(val)
-                draft.avaliable_sizes.splice(idx,1)
-            }
-        }))
+
+        // this.setState(state=> produce(state, draft=>{
+        //     if(draft.avaliable_sizes.indexOf(val)<0){
+        //         draft.avaliable_sizes.push(val)
+        //     }else{
+        //         const idx = draft.avaliable_sizes.indexOf(val)
+        //         draft.avaliable_sizes.splice(idx,1)
+        //     }
+        // }))
     }
     handleSubmit = (e) =>{
         e.preventDefault()
@@ -162,6 +180,9 @@ class ProductCreateForm extends React.Component{
                                 <Col lg={6}>
                                     <Form.Group controlId="avaliableSize">
                                         <Form.Label>Available Size:</Form.Label>
+
+                                            <MultiSelect opt={["xs","s","m","l","xl"]} avaliable_sizes={this.avaliable_sizes}/>
+
                                             <Form.Control 
                                                 as="select" 
                                                 multiple
