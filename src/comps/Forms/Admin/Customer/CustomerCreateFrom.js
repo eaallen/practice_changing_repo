@@ -8,7 +8,7 @@ class CustomerCreateForm extends React.Component{
         this.state = {
             // bool: true
             customer_email:"",
-            customer_size:""
+            customer_size:"XXS"
         }
     }
 

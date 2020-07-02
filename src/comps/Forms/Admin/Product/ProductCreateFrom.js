@@ -11,11 +11,11 @@ class ProductCreateForm extends React.Component{
             product_description:"",
             image_name:7,
             product_color:"",
-            product_price:"",
-            product_catagory:"",
-            product_type:"",
+            product_price:0.00,
+            product_catagory:"Men",
+            product_type:"Shirt",
             avaliable_sizes:[],
-            product_current_size:"",
+            product_current_size:"XS",
             product_reserved:"false",
             product_customize:"false"
          }
