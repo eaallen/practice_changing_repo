@@ -111,7 +111,16 @@ export const AppContext = React.createContext()
             console.error(error)
           })
         }
-
+        doCreateOneRecord = async(_collection, obj) =>{
+          let success = false
+          this.db.collection(_collection).add(obj).then(()=>{
+            console.log("it is deleted")
+            success=true
+            this.setState({deleted_one_record:success})
+          }).catch(error=>{
+            console.error(error)
+          })
+        }
         getOneRecord = (_collection, item_wanted) => this.db.collection(_collection).doc(item_wanted)
         checkState = async() =>{ await
           this.auth.onAuthStateChanged(function(user) {
