@@ -37,9 +37,9 @@ class AdminProduct extends React.Component{
     form_switch = (action) =>{
         switch(action){
             case "edit":
-            return <ProductUpdateFrom product={this.state.product} show_change={()=>this.componentDidMount()}/>
+            return <ProductUpdateFrom product={{...this.state.product}} show_change={()=>this.componentDidMount()}/>
             case "delete":
-            return <ProductDeleteForm product={this.state.product} show_change={()=>this.componentDidMount()}/>
+            return <ProductDeleteForm product={{...this.state.product}} show_change={()=>this.componentDidMount()}/>
             // default:
             // return <ProductCreateFrom/>
         }
@@ -51,7 +51,7 @@ class AdminProduct extends React.Component{
     }
 
     render(){
-        console.log(this.state.products,"products")
+        console.log(this.props.products,"products")
         
         return(
             <div>
