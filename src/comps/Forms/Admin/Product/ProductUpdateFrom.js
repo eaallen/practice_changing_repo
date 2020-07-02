@@ -2,6 +2,7 @@ import { withFirebase } from "../../../Firebase"
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import produce from 'immer'
+let arr = []
 class ProductUpdateForm extends React.Component{
     constructor(props){
         super(props)
@@ -27,14 +28,22 @@ class ProductUpdateForm extends React.Component{
     }
     avaliable_sizes(e){
         const val = e.target.value
-        this.setState(state=> produce(state, draft=>{
-            if(draft.avaliable_sizes.indexOf(val)<0){
-                draft.avaliable_sizes.push(val)
-            }else{
-                const idx = draft.avaliable_sizes.indexOf(val)
-                draft.avaliable_sizes.splice(idx,1)
-            }
-        }))
+        
+        if(arr.indexOf(val)<0){
+            arr.push(val)
+        }else{
+            const idx = arr.indexOf(val)
+            arr.filter(item => item!==val )
+        }
+        console.log("muilti--->",arr)
+    // this.setState(state=> produce(state, draft=>{
+    //         if(draft.avaliable_sizes.indexOf(val)<0){
+    //             draft.avaliable_sizes.push(val)
+    //         }else{
+    //             const idx = draft.avaliable_sizes.indexOf(val)
+    //             draft.avaliable_sizes.filter(item => item!==val )
+    //         }
+    //     }))
     }
     render(){
         console.log("state of ProductUpdateForm{}",this.state)
@@ -141,7 +150,10 @@ class ProductUpdateForm extends React.Component{
                                 <Col lg={6}>
                                     <Form.Group controlId="availableSize">
                                         <Form.Label>Available Size:</Form.Label>
-                                            <Form.Control as="select" multiple name="avaliable_sizes"
+                                            <Form.Control 
+                                                as="select" 
+                                                multiple 
+                                                name="avaliable_sizes"
                                                 value={this.state.avaliable_sizes} 
                                                 onChange={e => this.avaliable_sizes(e)}
                                             >

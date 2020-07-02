@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from './../../../Firebase'
 import produce from 'immer'
+let arr =[]
 class ProductCreateForm extends React.Component{
     constructor(props){
         super(props)
@@ -37,6 +38,9 @@ class ProductCreateForm extends React.Component{
     
     avaliable_sizes(e){
         const val = e.target.value
+
+        console.log("val", val)
+        
         this.setState(state=> produce(state, draft=>{
             if(draft.avaliable_sizes.indexOf(val)<0){
                 draft.avaliable_sizes.push(val)
@@ -156,14 +160,14 @@ class ProductCreateForm extends React.Component{
 
                             <Row>
                                 <Col lg={6}>
-                                    <Form.Group controlId="availableSize">
+                                    <Form.Group controlId="avaliableSize">
                                         <Form.Label>Available Size:</Form.Label>
                                             <Form.Control 
                                                 as="select" 
                                                 multiple
-                                                name="avaailable_sizes"
+                                                name="avaliable_sizes"
                                                 value={this.state.available_size}
-                                                onChange={e => this.avaliable_sizes(e)}
+                                                onClick={e => this.avaliable_sizes(e)}
                                                 required
                                             >
                                                 <option value="xs">XS</option>
