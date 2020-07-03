@@ -88,7 +88,8 @@ class AdminCustomer extends React.Component{
                                         <tr key={prod.id} className="table-data">
                                             <td className="text-center">
                                                 <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_customer(prod,"edit")}>EDIT</bs.Button> <br/><br/>
-                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_customer(prod,"delete")}>DELETE</bs.Button>
+                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_customer(prod,"delete")}>DELETE</bs.Button><br/>
+                                                <bs.Button onClick={e=>{this.props.context.doCreateOneRecord("customer",prod); this.componentDidMount()}}>CLONE</bs.Button>
                                             </td>
                                             {Object.entries(prod).map((item,i)=>{
                                                 return(

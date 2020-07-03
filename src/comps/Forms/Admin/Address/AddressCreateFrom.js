@@ -20,7 +20,7 @@ class AddressCreateForm extends React.Component{
     render(){
         return(
             <div>
-                <Row>
+                {/* <Row> */}
                     {/* <Col lg={2}/>
                     <Col lg={8}> */}
                         <Form>
@@ -59,7 +59,7 @@ class AddressCreateForm extends React.Component{
                         </Form>
                     {/* </Col> */}
                     {/* <Col lg={2}/>  */}
-                </Row>
+                {/* </Row> */}
             </div>
         )
     }

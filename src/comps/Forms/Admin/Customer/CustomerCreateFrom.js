@@ -1,7 +1,9 @@
 import React from 'react'
-import { Form, Row, Col, Button } from 'react-bootstrap'
+import { Form, Row, Col, Button, Collapse } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
 import AddressCreateFrom from '../Address/AddressCreateFrom'
+import Toggle from '../../../Tools/Toggle'
+import produce from 'immer'
 class CustomerCreateForm extends React.Component{
     constructor(props){
         super(props)
@@ -9,7 +11,9 @@ class CustomerCreateForm extends React.Component{
         this.state = {
             // bool: true
             customer_email:"",
-            customer_size:"XXS"
+            customer_size:"XXS",
+            addShippingAddress:false,
+            addresses:[]
         }
     }
 
@@ -18,6 +22,19 @@ class CustomerCreateForm extends React.Component{
         this.setState({[e.target.name]:e.target.value})
     }
 
+    addAddress = () =>{
+        this.setState(state=> produce(state, draft=>{
+            draft.addresses.push(<AddressCreateFrom/>)
+        })) 
+    }
+    removeAddress = (idx) =>{
+        console.log("idx----->",idx)
+        const arr = this.state.addresses.filter(comp=> this.state.addresses.indexOf(comp)!==idx)
+        console.log(arr)
+        this.setState(state=> produce(state, draft=>{
+            draft.addresses = arr
+        })) 
+    }
     render(){
         return(
             <div>
@@ -58,8 +75,41 @@ class CustomerCreateForm extends React.Component{
 
                                 </Col>
                             </Row>
-                            <AddressCreateFrom/>
-
+                            <Row>
+                                <Col lg={12}>
+                                    {this.state.addresses.map((comp,idx)=>{
+                                        return(
+                                            <div key={idx}>
+                                                <Toggle defaultIndex={1}>{toggle=><>
+                                                    {
+                                                        toggle.value?
+                                                        <span onClick={e=>toggle.toggle()} className="text-danger">
+                                                            hide
+                                                        </span>
+                                                        :
+                                                        <span onClick={e=>toggle.toggle()} className="text-primary">
+                                                            show
+                                                        </span>
+                                                    }
+                                                    
+                                                    <Collapse in={toggle.value} timeout={300}>
+                                                        <div>
+                                                            <div>
+                                                                {comp}
+                                                                <Button onClick={e=>this.removeAddress(idx)} variant="outline-danger">Delete</Button>
+                                                            </div>
+                                                        </div>
+                                                    </Collapse>
+                                                    <br/>
+                                                </>}</Toggle>
+                                            </div>
+                                        )
+                                    })}
+                                    <Button onClick={e=>this.addAddress()}>Add Address</Button>
+                                    <br/>
+                                    <br/>
+                                </Col>
+                            </Row>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
