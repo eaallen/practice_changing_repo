@@ -35,13 +35,20 @@ class CustomerCreateForm extends React.Component{
             draft.addresses = arr
         })) 
     }
+    submit = async(e) =>{
+        e.preventDefault()
+        const data = this.state
+        delete data.addShippingAddress
+        delete data.addresses
+        this.props.context.doCreateOneRecord("customer",data)
+    }
     render(){
         return(
             <div>
                 <Row>
                     <Col lg={2}/>
                     <Col lg={8}>
-                        <Form>
+                        <Form onSubmit={e=>this.submit(e)}>
                             <Form.Group controlId="customerEmail">
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control type="email"
@@ -64,12 +71,12 @@ class CustomerCreateForm extends React.Component{
                                                 value={this.state.customer_size}
                                                 onChange={e => this.handleChange(e)}
                                             >
-                                                <option>XXS</option>
-                                                <option>XS</option>
-                                                <option>S</option>
-                                                <option>M</option>
-                                                <option>L</option>
-                                                <option>XL</option>
+                                                <option value="xxs">XXS</option>
+                                                <option value="xs">XS</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
                                             </Form.Control>
                                     </Form.Group>
 

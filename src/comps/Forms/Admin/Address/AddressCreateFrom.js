@@ -23,7 +23,7 @@ class AddressCreateForm extends React.Component{
                 {/* <Row> */}
                     {/* <Col lg={2}/>
                     <Col lg={8}> */}
-                        <Form>
+                        {/* <Form> */}
                             <Form.Group controlId="customerEmail">
                                 <Form.Label>Address 1</Form.Label>
                                 <Form.Control type="email"
@@ -56,7 +56,7 @@ class AddressCreateForm extends React.Component{
                                     </Form.Group>
                                 </Col>
                             </Row>
-                        </Form>
+                        {/* </Form> */}
                     {/* </Col> */}
                     {/* <Col lg={2}/>  */}
                 {/* </Row> */}

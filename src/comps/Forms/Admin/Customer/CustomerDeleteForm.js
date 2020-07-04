@@ -12,8 +12,8 @@ class CustomerDeleteForm extends React.Component{
         // }
     }
     handle_delete = () =>{
-        this.props.context.doDeleteOneRecord("customer",this.props.product.id)
-        this.props.history.push('/Admin/Product')
+        this.props.context.doDeleteOneRecord("customer",this.props.customer.id)
+        // this.props.history.push('/Admin/Product')
         this.props.show_change()
     }
     render(){
