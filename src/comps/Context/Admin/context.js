@@ -1,5 +1,5 @@
 import React from 'react'
-import {AppContex} from './AdminCtx'
+import {AppContext} from './AdminCtx'
 
 
 export default function withAdminCtx(Component) {

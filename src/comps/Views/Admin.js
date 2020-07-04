@@ -4,6 +4,7 @@ import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import AdminProduct from '../Forms/Admin/Product'
 import AdminCustomer from '../Forms/Admin/Customer'
+import AdminCtx from '../Context/Admin'
 
 
 /**************************************************************************************************
@@ -35,7 +36,9 @@ function Admin(props){
     return(
         <div>
             <Link to="/Admin/defualt">Admin Home</Link>
-            {form_switch()}
+            <AdminCtx>
+                {form_switch()}
+            </AdminCtx>
         </div>
     )
 }

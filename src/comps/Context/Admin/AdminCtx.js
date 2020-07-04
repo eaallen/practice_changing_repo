@@ -1,8 +1,7 @@
 import React from 'react'
+import Firebase from '../../Firebase'
 export const AppContext = React.createContext()
-
-import React from 'react'
-class AdminCtx extends React.Component{
+class AdminCtx extends Firebase{
     constructor(props){
         super(props)
         
@@ -10,8 +9,11 @@ class AdminCtx extends React.Component{
             bool: true
         }
         this.actions = {
-            
+            test:this.test,
         }
+    }
+    componentDidMount = async() =>{
+
     }
 
     render(){

@@ -63,9 +63,7 @@ export const AppContext = React.createContext()
 
         
         updateUserAuth = (userInfo) =>{
-          // this.state.auth_user = userInfo
-          // // this.state.auth_user = userInfo          
-          // // this.setState({auth_user: userInfo})
+          console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
         }
         doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
 
