@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
+import {states} from '../../../../constanst'
 class AddressCreateForm extends React.Component{
     constructor(props){
         super(props)
@@ -41,7 +42,7 @@ class AddressCreateForm extends React.Component{
                                     onChange={e => this.handleChange(e)}
                             />
                             </Form.Group>
-                            <Form.Group controlId="customerEmail">
+                            <Form.Group>
                                 <Form.Label>Address 1</Form.Label>
                                 <Form.Control type="text"
                                     placeholder="123 ABC street"
@@ -51,7 +52,7 @@ class AddressCreateForm extends React.Component{
                                     onChange={e => this.handleChange(e)}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="customerEmail">
+                            <Form.Group>
                                 <Form.Label>Address 2</Form.Label>
                                 <Form.Control type="text"
                                     placeholder="123 ABC street"
@@ -65,44 +66,66 @@ class AddressCreateForm extends React.Component{
 
                             <Row>
                                 <Col lg={5}>
-                                    <Form.Group controlId="customerEmail">
-                                        <Form.Label>Address 2</Form.Label>
+                                    <Form.Group>
+                                        <Form.Label>City</Form.Label>
                                         <Form.Control type="text"
-                                            placeholder="123 ABC street"
+                                            placeholder=""
                                             required
-                                            name="address_street_two"
-                                            value={this.state.address_street_two}
+                                            name="address_city"
+                                            value={this.state.address_city}
                                             onChange={e => this.handleChange(e)}
                                         />
                                     </Form.Group>
                                 </Col>
 
                                 <Col lg={2}>
-                                    <Form.Group controlId="customerEmail">
-                                        <Form.Label>Address 2</Form.Label>
-                                        <Form.Control type="text"
-                                            placeholder="123 ABC street"
-                                            required
-                                            name="address_street_two"
-                                            value={this.state.address_street_two}
+                                    <Form.Group>
+                                        <Form.Label>State</Form.Label>
+                                        <Form.Control 
+                                            as="select"
+                                            name="address_state"
+                                            value={this.state.address_state}
                                             onChange={e => this.handleChange(e)}
-                                        />
+                                        >
+                                            {states.map(state=>{
+                                                return(
+                                                    <option value={state} key={state}>{state}</option>
+                                                )
+                                            })}
+                                        </Form.Control>
                                     </Form.Group>
                                 </Col>
 
                                 <Col lg={5}>
-                                    <Form.Group controlId="customerEmail">
-                                        <Form.Label>Address 2</Form.Label>
-                                        <Form.Control type="text"
-                                            placeholder="123 ABC street"
+                                    <Form.Group>
+                                        <Form.Label>Zip Code</Form.Label>
+                                        <Form.Control type="number"
+                                            placeholder=""
                                             required
-                                            name="address_street_two"
-                                            value={this.state.address_street_two}
+                                            name="address_zip"
+                                            value={this.state.address_zip}
                                             onChange={e => this.handleChange(e)}
                                         />
                                     </Form.Group>
                                 </Col>
                             </Row>
+
+                            <Form.Group>
+                                <Form.Label>State</Form.Label>
+                                <Form.Control 
+                                    as="select"
+                                    name="address_state"
+                                    value={this.state.address_state}
+                                    onChange={e => this.handleChange(e)}
+                                >
+                                    {states.map(state=>{
+                                        return(
+                                            <option value={state} key={state}>{state}</option>
+                                        )
+                                    })}
+                                </Form.Control>
+                            </Form.Group>
+
                         {/* </Form> */}
                     {/* </Col> */}
                     {/* <Col lg={2}/>  */}

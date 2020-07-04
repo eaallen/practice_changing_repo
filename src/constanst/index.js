@@ -5,4 +5,4 @@ import * as ROUTE from './router'
 
 
 export default ROUTE
-export states
+export {states}
