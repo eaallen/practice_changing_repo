@@ -7,8 +7,15 @@ class AddressCreateForm extends React.Component{
         
         this.state = {
             // bool: true
-            customer_email:"",
-            customer_size:"XXS"
+            address_street:this.props.address.address_street || "",
+            address_street_two:this.props.address.address_street_two || "",
+            address_zip:this.props.address.address_zip || "",
+            address_state:this.props.address.address_state || "",
+            address_city:this.props.address.address_city || "",
+            address_zip:this.props.address.address_zip || "",
+            address_name:this.props.address.address_name || "",
+            address_is_billing:this.props.address.address_is_billing || "",
+            address_is_default:this.props.address.address_is_default || "",
         }
     }
 
@@ -24,35 +31,75 @@ class AddressCreateForm extends React.Component{
                     {/* <Col lg={2}/>
                     <Col lg={8}> */}
                         {/* <Form> */}
-                            <Form.Group controlId="customerEmail">
-                                <Form.Label>Address 1</Form.Label>
-                                <Form.Control type="email"
-                                    placeholder="xample@mail.com"
+                            <Form.Group controlId="name">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text"
+                                    placeholder="John Doe"
                                     required
-                                    name="customer_email"
-                                    value={this.state.customer_email}
+                                    name="address_name"
+                                    value={this.state.address_name}
                                     onChange={e => this.handleChange(e)}
                             />
+                            </Form.Group>
+                            <Form.Group controlId="customerEmail">
+                                <Form.Label>Address 1</Form.Label>
+                                <Form.Control type="text"
+                                    placeholder="123 ABC street"
+                                    required
+                                    name="address_street"
+                                    value={this.state.address_street}
+                                    onChange={e => this.handleChange(e)}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="customerEmail">
+                                <Form.Label>Address 2</Form.Label>
+                                <Form.Control type="text"
+                                    placeholder="123 ABC street"
+                                    required
+                                    name="address_street_two"
+                                    value={this.state.address_street_two}
+                                    onChange={e => this.handleChange(e)}
+                                />
                             </Form.Group>
 
 
                             <Row>
-                                <Col>
-                                    <Form.Group controlId="customerSize">
-                                        <Form.Label>Select State</Form.Label>
-                                            <Form.Control 
-                                                as="select"
-                                                name="customer_size"
-                                                value={this.state.customer_size}
-                                                onChange={e => this.handleChange(e)}
-                                            >
-                                                <option>XXS</option>
-                                                <option>XS</option>
-                                                <option>S</option>
-                                                <option>M</option>
-                                                <option>L</option>
-                                                <option>XL</option>
-                                            </Form.Control>
+                                <Col lg={5}>
+                                    <Form.Group controlId="customerEmail">
+                                        <Form.Label>Address 2</Form.Label>
+                                        <Form.Control type="text"
+                                            placeholder="123 ABC street"
+                                            required
+                                            name="address_street_two"
+                                            value={this.state.address_street_two}
+                                            onChange={e => this.handleChange(e)}
+                                        />
+                                    </Form.Group>
+                                </Col>
+
+                                <Col lg={2}>
+                                    <Form.Group controlId="customerEmail">
+                                        <Form.Label>Address 2</Form.Label>
+                                        <Form.Control type="text"
+                                            placeholder="123 ABC street"
+                                            required
+                                            name="address_street_two"
+                                            value={this.state.address_street_two}
+                                            onChange={e => this.handleChange(e)}
+                                        />
+                                    </Form.Group>
+                                </Col>
+
+                                <Col lg={5}>
+                                    <Form.Group controlId="customerEmail">
+                                        <Form.Label>Address 2</Form.Label>
+                                        <Form.Control type="text"
+                                            placeholder="123 ABC street"
+                                            required
+                                            name="address_street_two"
+                                            value={this.state.address_street_two}
+                                            onChange={e => this.handleChange(e)}
+                                        />
                                     </Form.Group>
                                 </Col>
                             </Row>

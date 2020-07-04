@@ -24,7 +24,7 @@ class CustomerCreateForm extends React.Component{
 
     addAddress = () =>{
         this.setState(state=> produce(state, draft=>{
-            draft.addresses.push(<AddressCreateFrom/>)
+            draft.addresses.push(<AddressCreateFrom address/>)
         })) 
     }
     removeAddress = (idx) =>{
