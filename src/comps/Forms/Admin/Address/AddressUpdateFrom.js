@@ -6,13 +6,17 @@ class AddressUpdateForm extends React.Component{
         super(props)
         
         this.state = {
-            //  key:value
             customer_email:this.props.customer.customer_email,
-            customer_size:this.props.customer.customer_size
+            customer_size:this.props.customer.customer_size,
+            customers: null        
         }
     }
+    componentDidMount = async() =>{
+        const arr_customers = await this.props.context.doQueryAll("customer")
+        this.setState({customers:arr_customers})  
+    }
 
-    handleChange(e){
+    handleChange = (e) =>{
         console.log(e.target)
         this.setState({[e.target.name]:e.target.value})
     }

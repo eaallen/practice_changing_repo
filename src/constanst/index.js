@@ -1,8 +1,8 @@
-import states from './states'
+import STATES from './states'
 import * as ROUTE from './router'
 
 
 
 
 export default ROUTE
-export {states}
+export {STATES}
