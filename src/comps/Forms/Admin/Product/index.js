@@ -6,7 +6,6 @@ import * as bs from 'react-bootstrap'
 import produce from 'immer'
 import ProductDeleteForm from './ProductDeleteForm'
 import ModalForm from '../../../Tools/ModalForm'
-import {withAdminCtx} from '../../../Context/Admin'
 
 class AdminProduct extends React.Component{
     constructor(props){
@@ -53,7 +52,6 @@ class AdminProduct extends React.Component{
 
     render(){
         console.log(this.props.products,"products")
-        this.props.adminCtx.updateUserAuth()
         return(
             <div>
                 <div>
@@ -117,4 +115,4 @@ class AdminProduct extends React.Component{
     }
 }
 
-export default withAdminCtx(withFirebase(AdminProduct))
+export default withFirebase(AdminProduct)
