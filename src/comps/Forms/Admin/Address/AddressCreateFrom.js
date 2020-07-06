@@ -15,8 +15,8 @@ class AddressCreateForm extends React.Component{
             address_city:this.props.address.address_city || "",
             address_zip:this.props.address.address_zip || "",
             address_name:this.props.address.address_name || "",
-            address_is_billing:this.props.address.address_is_billing || "",
-            address_is_default:this.props.address.address_is_default || "",
+            address_is_billing:this.props.address.address_is_billing || false,
+            address_is_default:this.props.address.address_is_default || true,
             customers: null,
             address_customer_id: this.props.address.address_customer_id || "",        
         }
@@ -33,8 +33,18 @@ class AddressCreateForm extends React.Component{
         console.log(e.target)
         this.setState({[e.target.name]:e.target.value})
     }
-
+    handleCheckBox = (e) =>{
+        this.setState({[e.target.name]:e.target.checked})
+    }
+    handleDropDown = (e) =>{
+        if(e.target.value ==="false"){
+            this.setState({[e.target.name]:false})
+        }else{
+            this.setState({[e.target.name]:true})
+        }
+    }
     render(){
+        console.log("ADDRESS_____________>", this.state)
         return(
             <div>
                 {/* <Row> */}
@@ -162,21 +172,29 @@ class AddressCreateForm extends React.Component{
                                     </Form.Group>
                                 </Col>
                             </Row>
-
-                            <Form.Group>
-                                <Form.Label>State</Form.Label>
+                            
+                            <Form.Group controlId="name">
+                                <Form.Label>Type of Address</Form.Label>
                                 <Form.Control 
                                     as="select"
-                                    name="address_state"
-                                    value={this.state.address_state}
-                                    onChange={e => this.handleChange(e)}
+                                    required
+                                    name="address_is_billing"
+                                    value={this.state.address_is_billing}
+                                    onChange={e => this.handleDropDown(e)}
                                 >
-                                    {STATES.map(state=>{
-                                        return(
-                                            <option value={state} key={state}>{state}</option>
-                                        )
-                                    })}
+                                    <option value={true}>Billing</option>
+                                    <option value={false}>Shipping</option>
                                 </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Check 
+                                    label={`Set this as my default${this.state.address_is_billing? " billing ":" shipping "}address`}
+                                    type="checkbox"
+                                    name="address_is_default"
+                                    checked={this.state.address_is_default}
+                                    onChange={e => this.handleCheckBox(e)}
+                                />
                             </Form.Group>
 
                         {/* </Form> */}
