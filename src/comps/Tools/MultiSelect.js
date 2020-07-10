@@ -11,15 +11,15 @@ export default class MultiSelect extends React.Component{
         console.log("multi!", e.target.checked)
         const val = e.target.checked
         const name = e.target.name
-        this.props.avaliable_sizes(val,name)
+        this.props.change_avaliable_sizes(val,name)
     }
     render(){
         return(
             <div>
-                {this.props.opt.map(item=>{
+                {Object.entries(this.props.opt).map(item=>{
                     return(
                         <div key={item}>
-                            <input type="checkbox" name={item} checked={false} onChange={e=> this.handleChange(e)}/> {item.toUpperCase()}
+                            <input type="checkbox" name={item[0]} checked={item[1]} onChange={e=> this.handleChange(e)}/> {item[0].toUpperCase()}
                         </div>
                     )
                 })}

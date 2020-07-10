@@ -8,6 +8,12 @@ FOR ALEX------------------------------------------------
 
 
 
+[
+  [xs,true],[s,false],[],[]
+]
+[
+  false,false,false,false,false,
+]
 
 
 

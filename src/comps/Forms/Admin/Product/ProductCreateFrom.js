@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from './../../../Firebase'
 import produce from 'immer'
 import MultiSelect from '../../../Tools/MultiSelect'
-let arr =[]
+
 class ProductCreateForm extends React.Component{
     constructor(props){
         super(props)
@@ -16,7 +16,13 @@ class ProductCreateForm extends React.Component{
             product_price:0.00,
             product_catagory:"Men",
             product_type:"Shirt",
-            avaliable_sizes:{xs:false, s:false},
+            avaliable_sizes:{
+                xs:false, 
+                s:false,
+                m:false,
+                l:false,
+                xl:false,
+            },
             product_current_size:"XS",
             product_reserved:"false",
             product_customize:"false"
@@ -40,22 +46,11 @@ class ProductCreateForm extends React.Component{
     prac = (e) =>{
         this.setState({prac:e.target.name})
     }
-    avaliable_sizes = (value,name) => {
-        const val = value
 
-        if(val){
-            this.setState(state=> produce(state, draft=>{
-                draft.avaliable_sizes.push(name)
-            }))
-        }else{
-            // const idx = this.state.avaliable_sizes.indexOf(name)
-            let arr = []
-
-            this.setState(state=> produce(state, draft=>{
-                draft.avaliable_sizes = arr
-            })) 
-        }
-
+    change_avaliable_sizes = (val,size_name) => { // val: bool size_name: string
+        this.setState(state=> produce(state, draft=>{
+            draft.avaliable_sizes[size_name] = val
+        }))
 
         console.log("val", val)
 
@@ -70,7 +65,18 @@ class ProductCreateForm extends React.Component{
     }
     handleSubmit = (e) =>{
         e.preventDefault()
-        this.props.context.doCreateOneRecord('product',this.state)
+        const dictionary = this.state.avaliable_sizes // a_s = 
+        let values = this.state
+        let arr = []
+        for(const key in dictionary){ // get keys from dictionary 
+            console.log("-----> key", key)
+            console.log("-----> value", dictionary[key])
+            if(dictionary[key]){
+                arr.push(key)
+            }
+        }
+        values.avaliable_sizes = arr
+        this.props.context.doCreateOneRecord('product',values)
     }
     render(){
         console.log("STATE", this.state)
@@ -180,23 +186,7 @@ class ProductCreateForm extends React.Component{
                                 <Col lg={6}>
                                     <Form.Group controlId="avaliableSize">
                                         <Form.Label>Available Size:</Form.Label>
-
-                                            <MultiSelect opt={["xs","s","m","l","xl"]} avaliable_sizes={this.avaliable_sizes} val ={this.state.avaliable_sizes}/>
-
-                                            <Form.Control 
-                                                as="select" 
-                                                multiple
-                                                name="avaliable_sizes"
-                                                value={this.state.available_size}
-                                                onClick={e => this.avaliable_sizes(e)}
-                                                required
-                                            >
-                                                <option value="xs">XS</option>
-                                                <option value="s">S</option>
-                                                <option value="m">M</option>
-                                                <option value="l">L</option>
-                                                <option value="xl">XL</option>
-                                            </Form.Control>
+                                        <MultiSelect opt={this.state.avaliable_sizes} change_avaliable_sizes={this.change_avaliable_sizes}/>
                                     </Form.Group>
                                 </Col>
 
