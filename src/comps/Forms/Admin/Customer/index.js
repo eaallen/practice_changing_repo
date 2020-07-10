@@ -3,13 +3,14 @@ import CustomerCreateFrom from './CustomerCreateFrom'
 import CustomerUpdateFrom from './CustomerUpdateFrom'
 import { withFirebase } from '../../../Firebase'
 import * as bs from 'react-bootstrap'
-import produce from 'immer'
+import produce, { produceWithPatches } from 'immer'
 import CustomerDeleteForm from './CustomerDeleteForm'
 import ModalForm from '../../../Tools/ModalForm'
-
+let date = new Date()
 class AdminCustomer extends React.Component{
     constructor(props){
         super(props)
+        // this.date = new Date()
         this.state ={
             customers:null, // an array of objects
             action:"create",
@@ -49,6 +50,14 @@ class AdminCustomer extends React.Component{
             draft.modal_on = !draft.modal_on
           }))
     }
+    cloneIt =async(data) =>{
+        const obj = {
+            customer_email:data.customer_email,
+            customer_size:data.customer_size,
+        }
+        await this.props.context.doCreateOneRecord("customer",obj)
+        this.componentDidMount()
+    }
 
     render(){
         console.log(this.state.customers,"customers")
@@ -69,45 +78,53 @@ class AdminCustomer extends React.Component{
                     :
                     <div>
                         <h3>table for Read, Update, Delete</h3>
-                        <bs.Table striped bordered hover size="sm" responsive>
-                            <thead>
-                                <tr>
-                                    <th>Actions</th>
-                                    {Object.keys(this.state.customers[0]).map((prod_col, idx) =>{
+                        {
+                            !this.state.customers?
+                            <p>loading...</p>
+                            :
+                            <>
+                            <bs.Table striped bordered hover size="sm" responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Actions</th>
+                                        {Object.keys(this.state.customers[0]).map((prod_col, idx) =>{
+                                            return(
+                                            <th key ={idx}>
+                                                    {prod_col}
+                                            </th> 
+                                            )
+                                        })}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.customers.map(prod=>{
                                         return(
-                                        <th key ={idx}>
-                                                {prod_col}
-                                        </th> 
+                                            <tr key={prod.id} className="table-data">
+                                                <td className="text-center">
+                                                    <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_customer(prod,"edit")}>EDIT</bs.Button> <br/><br/>
+                                                    <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_customer(prod,"delete")}>DELETE</bs.Button><br/>
+                                                    <bs.Button onClick={e=>this.cloneIt(prod)}>CLONE</bs.Button>
+                                                </td>
+                                                {Object.entries(prod).map((item,i)=>{
+                                                    return(
+                                                        <td key={i}>
+                                                            {
+                                                                item[0]==="timestamp"?
+                                                                <>{date.toLocaleDateString(30*1000)}</>
+                                                                :
+                                                                <>{item[1].toString()}</>   
+                                                            }
+                                                            
+                                                        </td>
+                                                    )
+                                                })}
+                                            </tr>
                                         )
                                     })}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.customers.map(prod=>{
-                                    return(
-                                        <tr key={prod.id} className="table-data">
-                                            <td className="text-center">
-                                                <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_customer(prod,"edit")}>EDIT</bs.Button> <br/><br/>
-                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_customer(prod,"delete")}>DELETE</bs.Button>
-                                            </td>
-                                            {Object.entries(prod).map((item,i)=>{
-                                                return(
-                                                    <td key={i}>
-                                                        {
-                                                            item[0]==="customer_date"?
-                                                            <>{item[1].seconds}</>
-                                                            :
-                                                            <>{item[1].toString()}</>   
-                                                        }
-                                                        
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </bs.Table>
+                                </tbody>
+                            </bs.Table>
+                            </>
+                        }
         
                     </div>
                 }

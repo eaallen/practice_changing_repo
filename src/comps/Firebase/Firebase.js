@@ -63,9 +63,7 @@ export const AppContext = React.createContext()
 
         
         updateUserAuth = (userInfo) =>{
-          // this.state.auth_user = userInfo
-          // // this.state.auth_user = userInfo          
-          // // this.setState({auth_user: userInfo})
+          console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
         }
         doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
 
@@ -113,7 +111,11 @@ export const AppContext = React.createContext()
           })
         }
         doCreateOneRecord = async(_collection, obj) =>{
-          if(_collection==="product"){obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())}
+          if(_collection==="product"){
+            obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())
+          }else{
+            obj.timestamp = firebase.firestore.Timestamp.fromDate(new Date())
+          }
           let success = false
           await this.db.collection(_collection).add(obj).then(()=>{
             console.log("it is deleted")

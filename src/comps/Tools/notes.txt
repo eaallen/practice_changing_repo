@@ -7,13 +7,22 @@ FOR ALEX------------------------------------------------
 }
 
 
+dict = {
 
+<<<<<<< HEAD
 [
   [xs,true],[s,false],[],[]
 ]
 [
   false,false,false,false,false,
 ]
+=======
+  xs: true,
+  s: false,
+  
+
+}
+>>>>>>> d271c91eda7a0b990362de988c14198f6ee7ba4a
 
 
 

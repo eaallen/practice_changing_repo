@@ -4,7 +4,7 @@ import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import AdminProduct from '../Forms/Admin/Product'
 import AdminCustomer from '../Forms/Admin/Customer'
-
+import AdminAddress from '../Forms/Admin/Address'
 
 /**************************************************************************************************
  * Admin uses a switch to display componenets 
@@ -22,8 +22,8 @@ function Admin(props){
             return <AdminProduct/>
             case "Customer":
             return <AdminCustomer/>
-            case "":
-            // return <Component>
+            case "Address":
+            return <AdminAddress/>
             break
             case "":
             // return <Component>
@@ -52,7 +52,7 @@ const Default = (props) =>{
                 <Link to="/Admin/Product">Product</Link>
             </div>
             <div>
-                <Link to="/Admin/Customer">Customer</Link>
+                <Link to="/Admin/Address">Address</Link>
             </div>
             <div>
                 <Link to="/Admin/Customer">Customer</Link>
