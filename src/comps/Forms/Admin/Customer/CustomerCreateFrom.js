@@ -13,7 +13,6 @@ class CustomerCreateForm extends React.Component{
             customer_email:"",
             customer_size:"XXS",
             addShippingAddress:false,
-            addresses:[]
         }
     }
 
@@ -22,11 +21,6 @@ class CustomerCreateForm extends React.Component{
         this.setState({[e.target.name]:e.target.value})
     }
 
-    addAddress = () =>{
-        this.setState(state=> produce(state, draft=>{
-            draft.addresses.push(<AddressCreateFrom address/>)
-        })) 
-    }
     removeAddress = (idx) =>{
         console.log("idx----->",idx)
         const arr = this.state.addresses.filter(comp=> this.state.addresses.indexOf(comp)!==idx)
@@ -80,41 +74,6 @@ class CustomerCreateForm extends React.Component{
                                             </Form.Control>
                                     </Form.Group>
 
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col lg={12}>
-                                    {this.state.addresses.map((comp,idx)=>{
-                                        return(
-                                            <div key={idx}>
-                                                <Toggle defaultIndex={1}>{toggle=><>
-                                                    {
-                                                        toggle.value?
-                                                        <span onClick={e=>toggle.toggle()} className="text-danger">
-                                                            hide
-                                                        </span>
-                                                        :
-                                                        <span onClick={e=>toggle.toggle()} className="text-primary">
-                                                            show
-                                                        </span>
-                                                    }
-                                                    
-                                                    <Collapse in={toggle.value} timeout={300}>
-                                                        <div>
-                                                            <div>
-                                                                {comp}
-                                                                <Button onClick={e=>this.removeAddress(idx)} variant="outline-danger">Delete</Button>
-                                                            </div>
-                                                        </div>
-                                                    </Collapse>
-                                                    <br/>
-                                                </>}</Toggle>
-                                            </div>
-                                        )
-                                    })}
-                                    <Button onClick={e=>this.addAddress()}>Add Address</Button>
-                                    <br/>
-                                    <br/>
                                 </Col>
                             </Row>
                             <Button variant="primary" type="submit">

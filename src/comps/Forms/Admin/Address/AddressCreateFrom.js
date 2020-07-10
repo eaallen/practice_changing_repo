@@ -2,21 +2,24 @@ import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import {withFirebase} from '../../../Firebase'
 import {STATES} from '../../../../constanst'
+import produce from 'immer'
 class AddressCreateForm extends React.Component{
     constructor(props){
         super(props)
         
         this.state = {
             // bool: true
-            address_street:this.props.address.address_street || "",
-            address_street_two:this.props.address.address_street_two || "",
-            address_zip:this.props.address.address_zip || "",
-            address_state:this.props.address.address_state || "",
-            address_city:this.props.address.address_city || "",
-            address_zip:this.props.address.address_zip || "",
-            address_name:this.props.address.address_name || "",
-            address_is_billing:this.props.address.address_is_billing || false,
-            address_is_default:this.props.address.address_is_default || true,
+            address:{
+                address_street:this.props.address.address_street || "",
+                address_street_two:this.props.address.address_street_two || "",
+                address_zip:this.props.address.address_zip || "",
+                address_state:this.props.address.address_state || "",
+                address_city:this.props.address.address_city || "",
+                address_zip:this.props.address.address_zip || "",
+                address_name:this.props.address.address_name || "",
+                address_is_billing:this.props.address.address_is_billing || false,
+                address_is_default:this.props.address.address_is_default || true,
+            },
             customers: null,
             address_customer_id: this.props.address.address_customer_id || "",        
         }
@@ -31,26 +34,47 @@ class AddressCreateForm extends React.Component{
 
     handleChange(e){
         console.log(e.target)
-        this.setState({[e.target.name]:e.target.value})
+        const name = e.target.name
+        const value = e.target.value 
+        this.setState(state=> produce(state, draft=>{
+            draft.address[name] = value
+        }))
     }
     handleCheckBox = (e) =>{
-        this.setState({[e.target.name]:e.target.checked})
+        const name = e.target.name
+        const checked = e.target.checked 
+        this.setState(state=> produce(state, draft=>{
+            draft.address[name] = checked
+        }))
     }
     handleDropDown = (e) =>{
-        if(e.target.value ==="false"){
-            this.setState({[e.target.name]:false})
+        const name = e.target.name
+        const value = e.target.value 
+        if(value ==="false"){
+            this.setState(state=> produce(state, draft=>{
+                draft[name] = true
+            }))
         }else{
-            this.setState({[e.target.name]:true})
-        }
+            this.setState(state=> produce(state, draft=>{
+                draft[name] = false
+            }))
+            }
+    }
+    submit = async(e) =>{
+        e.preventDefault()
+        const data = this.state
+        
+        await this.props.context.doCreateOneRecord(`customer/${data.id}/address`,data)
+        this.componentDidMount()
     }
     render(){
         console.log("ADDRESS_____________>", this.state)
         return(
             <div>
-                {/* <Row> */}
-                    {/* <Col lg={2}/>
-                    <Col lg={8}> */}
-                        {/* <Form> */}
+                <Row>
+                    <Col lg={2}/>
+                    <Col lg={8}>
+                        <Form onSubmit={e=>this.submit(e)}>
                         <Row>
                             <Col lg={7}>
                                 <Form.Group controlId="name">
@@ -99,7 +123,7 @@ class AddressCreateForm extends React.Component{
                                                 </>)
                                             })
                                             :
-                                            <option>loading...</option>
+                                            <option key="default">loading...</option>
                                         }
                                     </Form.Control>
                                 </Form.Group>
@@ -196,11 +220,13 @@ class AddressCreateForm extends React.Component{
                                     onChange={e => this.handleCheckBox(e)}
                                 />
                             </Form.Group>
-
-                        {/* </Form> */}
-                    {/* </Col> */}
-                    {/* <Col lg={2}/>  */}
-                {/* </Row> */}
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </Form>
+                    </Col>
+                    <Col lg={2}/> 
+                </Row>
             </div>
         )
     }

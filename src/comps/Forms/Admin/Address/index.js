@@ -1,45 +1,45 @@
 import React from 'react'
-import CustomerCreateFrom from './CustomerCreateFrom'
-import CustomerUpdateFrom from './CustomerUpdateFrom'
 import { withFirebase } from '../../../Firebase'
 import * as bs from 'react-bootstrap'
 import produce from 'immer'
-import CustomerDeleteForm from './CustomerDeleteForm'
 import ModalForm from '../../../Tools/ModalForm'
+import AddressUpdateFrom from './AddressUpdateFrom'
+import AddressDeleteForm from './AddressDeleteForm'
+import AddressCreateFrom from './AddressCreateFrom'
 
-class AdminCustomer extends React.Component{
+class AdminAddress extends React.Component{
     constructor(props){
         super(props)
         this.state ={
-            customers:null, // an array of objects
+            addresses:null, // an array of objects
             action:"create",
-            customer:null,  // a single object
+            address:null,  // a single object
             modal_on:false
         }
     }
     componentDidMount = async() =>{
-        const info = await this.props.context.doQueryAll('customer')
+        const info = await this.props.context.doQueryAll('address')
         const info2 = info
         this.setState(state=> produce(state, draft=>{
-          draft.customers = info2
+          draft.addresses = info2
           draft.modal_on = false
         }))
     }
 
-    action_on_customer = (customer_obj,type_of_action) =>{
+    action_on_obj = (obj,type_of_action) =>{
         this.handle_modal()
         if(type_of_action === "edit"){
-            this.setState({action:"edit", customer:customer_obj})
+            this.setState({action:"edit", address:obj})
         }else{
-            this.setState({action:"delete",customer:customer_obj})
+            this.setState({action:"delete",address:obj})
         }
     }
     form_switch = (action) =>{
         switch(action){
             case "edit":
-            return <CustomerUpdateFrom customer={this.state.customer} show_change={()=>this.componentDidMount()}/>
+            return <AddressUpdateFrom address={this.state.address} show_change={()=>this.componentDidMount()}/>
             case "delete":
-            return <CustomerDeleteForm customer={this.state.customer} show_change={()=>this.componentDidMount()}/>
+            return <AddressDeleteForm address={this.state.address} show_change={()=>this.componentDidMount()}/>
             // default:
             // return <CustomerCreateFrom/>
         }
@@ -51,13 +51,15 @@ class AdminCustomer extends React.Component{
     }
 
     render(){
-        console.log(this.state.customers,"customers")
-        
+        console.log(this.state.address,"address")
+        if(!this.state.addresses){
+            return <p>loading...</p>
+        }
         return(
             <div>
                 <div>
                     {/* <h3>Create customer</h3> */}
-                    <CustomerCreateFrom/>
+                    <AddressCreateFrom address/>
                     <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()} title={this.state.action}>
                         {this.form_switch(this.state.action)}    
                     </ModalForm>
@@ -87,8 +89,8 @@ class AdminCustomer extends React.Component{
                                     return(
                                         <tr key={prod.id} className="table-data">
                                             <td className="text-center">
-                                                <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_customer(prod,"edit")}>EDIT</bs.Button> <br/><br/>
-                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_customer(prod,"delete")}>DELETE</bs.Button>
+                                                <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_obj(prod,"edit")}>EDIT</bs.Button> <br/><br/>
+                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_obj(prod,"delete")}>DELETE</bs.Button>
                                             </td>
                                             {Object.entries(prod).map((item,i)=>{
                                                 return(
@@ -116,4 +118,4 @@ class AdminCustomer extends React.Component{
     }
 }
 
-export default withFirebase(AdminCustomer)
+export default withFirebase(AdminAddress)
