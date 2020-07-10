@@ -3,7 +3,7 @@ import { withFirebase } from "../../../Firebase"
 import { Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
-class CustomerDeleteForm extends React.Component{
+class AddressDeleteForm extends React.Component{
     constructor(props){
         super(props)
         
@@ -12,8 +12,8 @@ class CustomerDeleteForm extends React.Component{
         // }
     }
     handle_delete = () =>{
-        this.props.context.doDeleteOneRecord("customer",this.props.customer.id)
-        // this.props.history.push('/Admin/Product')
+        this.props.context.doDeleteOneRecord("customer",this.props.product.id)
+        this.props.history.push('/Admin/Product')
         this.props.show_change()
     }
     render(){
@@ -27,4 +27,4 @@ class CustomerDeleteForm extends React.Component{
         )
     }
 }
-export default withRouter(withFirebase(CustomerDeleteForm))
+export default withRouter(withFirebase(AddressDeleteForm))
