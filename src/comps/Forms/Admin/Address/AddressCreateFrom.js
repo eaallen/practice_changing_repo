@@ -47,24 +47,29 @@ class AddressCreateForm extends React.Component{
             draft.address[name] = checked
         }))
     }
-    handleDropDown = (e) =>{
+    handleCustomerId = (e) =>{
+        console.log(e.target)
         const name = e.target.name
         const value = e.target.value 
-        if(value ==="false"){
-            this.setState(state=> produce(state, draft=>{
-                draft[name] = true
-            }))
-        }else{
-            this.setState(state=> produce(state, draft=>{
-                draft[name] = false
-            }))
-            }
+        this.setState(state=> produce(state, draft=>{
+            draft[name] = value
+        }))
+    }
+    handleDropDown = (e) =>{
+        const name = e.target.name
+        const value = (e.target.value === 'true');
+        console.log(value) 
+        
+        this.setState(state=> produce(state, draft=>{
+            draft.address[name] = value
+        }))
+    
     }
     submit = async(e) =>{
         e.preventDefault()
-        const data = this.state
-        
-        await this.props.context.doCreateOneRecord(`customer/${data.id}/address`,data)
+        const data = {...this.state.address}
+        console.log(Object.isExtensible(data))
+        await this.props.context.doCreateOneRecord(`customer/${this.state.address_customer_id}/address`,data)
         this.componentDidMount()
     }
     render(){
@@ -96,31 +101,21 @@ class AddressCreateForm extends React.Component{
                                         required
                                         name="address_customer_id"
                                         value={this.state.address_customer_id}
-                                        onChange={e => this.handleChange(e)}
+                                        onChange={e => this.handleCustomerId(e)}
                                     >
                                         {
                                             this.state.customers?
 
                                             this.state.customers.map(customer=>{
-                                                return(<>
-                                                    {
-                                                        customer.id===this.state.address_customer_id? 
-                                                            <option 
-                                                                defaultValue
-                                                                key={customer.id} 
-                                                                value={customer.id}
-                                                            >
-                                                                {customer.customer_email}
-                                                            </option>    
-                                                        :
-                                                            <option 
-                                                                key={customer.id} 
-                                                                value={customer.id}
-                                                            >
-                                                                {customer.customer_email}
-                                                            </option>
-                                                    }
-                                                </>)
+                                                return(
+                                                    <option
+                                                        defaultValue={customer.id===this.state.address_customer_id?true:false}
+                                                        key={customer.id} 
+                                                        value={customer.id}
+                                                    >
+                                                        {customer.customer_email}
+                                                    </option>
+                                                )
                                             })
                                             :
                                             <option key="default">loading...</option>
@@ -203,11 +198,11 @@ class AddressCreateForm extends React.Component{
                                     as="select"
                                     required
                                     name="address_is_billing"
-                                    value={this.state.address_is_billing}
+                                    value={this.state.address.address_is_billing}
                                     onChange={e => this.handleDropDown(e)}
                                 >
-                                    <option value={true}>Billing</option>
-                                    <option value={false}>Shipping</option>
+                                    <option value={"true"} defaultValue={this.state.address.address_is_billing}>Billing</option>
+                                    <option value={"false"} defaultValue={!this.state.address.address_is_billing}>Shipping</option>
                                 </Form.Control>
                             </Form.Group>
 
@@ -216,7 +211,7 @@ class AddressCreateForm extends React.Component{
                                     label={`Set this as my default${this.state.address_is_billing? " billing ":" shipping "}address`}
                                     type="checkbox"
                                     name="address_is_default"
-                                    checked={this.state.address_is_default}
+                                    checked={this.state.address.address_is_default}
                                     onChange={e => this.handleCheckBox(e)}
                                 />
                             </Form.Group>

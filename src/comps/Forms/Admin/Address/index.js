@@ -18,10 +18,14 @@ class AdminAddress extends React.Component{
         }
     }
     componentDidMount = async() =>{
-        const info = await this.props.context.doQueryAll('address')
-        const info2 = info
+        const cust = await this.props.context.doQueryAll('customer')
+        const arr = []
+        for(const customer of cust){
+            let arr_of_address = await this.props.context.doQueryAll(`customer/${customer.id}/address`)
+            arr.concat(arr_of_address)
+        }
         this.setState(state=> produce(state, draft=>{
-          draft.addresses = info2
+          draft.addresses = arr
           draft.modal_on = false
         }))
     }
@@ -51,7 +55,7 @@ class AdminAddress extends React.Component{
     }
 
     render(){
-        console.log(this.state.address,"address")
+        console.log(this.state.addresses,"address")
         if(!this.state.addresses){
             return <p>loading...</p>
         }
@@ -75,7 +79,7 @@ class AdminAddress extends React.Component{
                             <thead>
                                 <tr>
                                     <th>Actions</th>
-                                    {Object.keys(this.state.customers[0]).map((prod_col, idx) =>{
+                                    {Object.keys(this.state.addresses[0]).map((prod_col, idx) =>{
                                         return(
                                         <th key ={idx}>
                                                 {prod_col}
@@ -85,7 +89,7 @@ class AdminAddress extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.customers.map(prod=>{
+                                {this.state.addresses.map(prod=>{
                                     return(
                                         <tr key={prod.id} className="table-data">
                                             <td className="text-center">
