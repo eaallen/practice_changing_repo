@@ -111,11 +111,7 @@ export const AppContext = React.createContext()
           })
         }
         doCreateOneRecord = async(_collection, obj) =>{
-          if(_collection==="product"){
-            obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())
-          }else{
-            obj.timestamp = firebase.firestore.Timestamp.fromDate(new Date())
-          }
+          obj.timestamp = [firebase.firestore.Timestamp.fromDate(new Date())]
           let success = false
           await this.db.collection(_collection).add(obj).then(()=>{
             console.log("it is deleted")
@@ -126,7 +122,7 @@ export const AppContext = React.createContext()
           return success
         }
         doUpdateOneRecord = async(_collection, obj, id) =>{
-          if(_collection==="product"){obj.product_date = firebase.firestore.Timestamp.fromDate(new Date())} // move this to point of create
+          obj.timestamp.push(firebase.firestore.Timestamp.fromDate(new Date()))
           let success = false
           await this.db.collection(_collection).doc(id).set(obj).then(()=>{
             success=true

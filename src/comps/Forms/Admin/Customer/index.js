@@ -61,7 +61,9 @@ class AdminCustomer extends React.Component{
 
     render(){
         console.log(this.state.customers,"customers")
-        
+        if(!this.state.customers){
+            return(<div>loading</div>)
+        }
         return(
             <div>
                 <div>

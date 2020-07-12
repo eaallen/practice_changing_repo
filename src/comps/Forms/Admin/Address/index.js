@@ -6,7 +6,7 @@ import ModalForm from '../../../Tools/ModalForm'
 import AddressUpdateFrom from './AddressUpdateFrom'
 import AddressDeleteForm from './AddressDeleteForm'
 import AddressCreateFrom from './AddressCreateFrom'
-
+let date = new Date()
 class AdminAddress extends React.Component{
     constructor(props){
         super(props)
@@ -103,8 +103,8 @@ class AdminAddress extends React.Component{
                                                 return(
                                                     <td key={i}>
                                                         {
-                                                            item[0]==="customer_date"?
-                                                            <>{item[1].seconds}</>
+                                                            item[0]==="timestamp"?
+                                                            <>{date.toLocaleDateString(30*1000)}</>
                                                             :
                                                             <>{item[1].toString()}</>   
                                                         }
