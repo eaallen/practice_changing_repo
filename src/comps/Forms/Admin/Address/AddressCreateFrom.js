@@ -13,7 +13,7 @@ class AddressCreateForm extends React.Component{
                 address_street:this.props.address.address_street || "",
                 address_street_two:this.props.address.address_street_two || "",
                 address_zip:this.props.address.address_zip || "",
-                address_state:this.props.address.address_state || "",
+                address_state:this.props.address.address_state || STATES[0],
                 address_city:this.props.address.address_city || "",
                 address_zip:this.props.address.address_zip || "",
                 address_name:this.props.address.address_name || "",
@@ -29,7 +29,7 @@ class AddressCreateForm extends React.Component{
         this.setState({customers:arr_customers})
         if(this.state.address_customer_id === ""){
             this.setState({address_customer_id: arr_customers[0].id})
-        }  
+        }
     }
 
     handleChange(e){
@@ -69,8 +69,11 @@ class AddressCreateForm extends React.Component{
         e.preventDefault()
         const data = {...this.state.address}
         console.log(Object.isExtensible(data))
-        await this.props.context.doCreateOneRecord(`customer/${this.state.address_customer_id}/address`,data)
-        this.componentDidMount()
+        Object.keys(this.props.address).length===0?
+            await this.props.context.doCreateOneRecord(`customer/${this.state.address_customer_id}/address`,data)
+            :
+            await this.props.context.doUpdateOneRecord(`customer/${this.state.address_customer_id}/address`,data,this.props.address.id)
+        this.props.show_change()
     }
     render(){
         console.log("ADDRESS_____________>", this.state)
@@ -88,7 +91,7 @@ class AddressCreateForm extends React.Component{
                                         placeholder="John Doe"
                                         required
                                         name="address_name"
-                                        value={this.state.address_name}
+                                        value={this.state.address.address_name}
                                         onChange={e => this.handleChange(e)}
                                     />
                                 </Form.Group>
@@ -100,7 +103,7 @@ class AddressCreateForm extends React.Component{
                                         as="select"
                                         required
                                         name="address_customer_id"
-                                        value={this.state.address_customer_id}
+                                        value={this.state.address.address_customer_id}
                                         onChange={e => this.handleCustomerId(e)}
                                     >
                                         {
@@ -130,7 +133,7 @@ class AddressCreateForm extends React.Component{
                                     placeholder="123 ABC street"
                                     required
                                     name="address_street"
-                                    value={this.state.address_street}
+                                    value={this.state.address.address_street}
                                     onChange={e => this.handleChange(e)}
                                 />
                             </Form.Group>
@@ -138,9 +141,8 @@ class AddressCreateForm extends React.Component{
                                 <Form.Label>Address 2</Form.Label>
                                 <Form.Control type="text"
                                     placeholder="123 ABC street"
-                                    required
                                     name="address_street_two"
-                                    value={this.state.address_street_two}
+                                    value={this.state.address.address_street_two}
                                     onChange={e => this.handleChange(e)}
                                 />
                             </Form.Group>
@@ -154,7 +156,7 @@ class AddressCreateForm extends React.Component{
                                             placeholder=""
                                             required
                                             name="address_city"
-                                            value={this.state.address_city}
+                                            value={this.state.address.address_city}
                                             onChange={e => this.handleChange(e)}
                                         />
                                     </Form.Group>
@@ -166,7 +168,7 @@ class AddressCreateForm extends React.Component{
                                         <Form.Control 
                                             as="select"
                                             name="address_state"
-                                            value={this.state.address_state}
+                                            value={this.state.address.address_state}
                                             onChange={e => this.handleChange(e)}
                                         >
                                             {STATES.map(state=>{
@@ -185,7 +187,7 @@ class AddressCreateForm extends React.Component{
                                             placeholder=""
                                             required
                                             name="address_zip"
-                                            value={this.state.address_zip}
+                                            value={this.state.address.address_zip}
                                             onChange={e => this.handleChange(e)}
                                         />
                                     </Form.Group>

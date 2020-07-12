@@ -22,7 +22,10 @@ class AdminAddress extends React.Component{
         const arr = []
         for(const customer of cust){
             let arr_of_address = await this.props.context.doQueryAll(`customer/${customer.id}/address`)
-            arr.concat(arr_of_address)
+            for(const address of arr_of_address){
+                address.customer_email=customer.customer_email
+                arr.push(address)
+            }
         }
         this.setState(state=> produce(state, draft=>{
           draft.addresses = arr
@@ -30,18 +33,20 @@ class AdminAddress extends React.Component{
         }))
     }
 
-    action_on_obj = (obj,type_of_action) =>{
+    action_on_obj = async(obj,type_of_action) =>{
+        console.log("----------------->", obj)
         this.handle_modal()
         if(type_of_action === "edit"){
-            this.setState({action:"edit", address:obj})
+            await this.setState({action:"edit", address:obj})
         }else{
-            this.setState({action:"delete",address:obj})
+            await this.setState({action:"delete",address:obj})
         }
     }
     form_switch = (action) =>{
+        console.log("!!!!!!!@#$%^&*",this.state.address)
         switch(action){
             case "edit":
-            return <AddressUpdateFrom address={this.state.address} show_change={()=>this.componentDidMount()}/>
+            return <AddressCreateFrom address={this.state.address} show_change={()=>this.componentDidMount()}/>
             case "delete":
             return <AddressDeleteForm address={this.state.address} show_change={()=>this.componentDidMount()}/>
             // default:
@@ -51,26 +56,24 @@ class AdminAddress extends React.Component{
     handle_modal = () =>{
         this.setState(state=> produce(state, draft=>{
             draft.modal_on = !draft.modal_on
-          }))
+        }))
     }
 
     render(){
         console.log(this.state.addresses,"address")
-        if(!this.state.addresses){
-            return <p>loading...</p>
-        }
+       
         return(
             <div>
                 <div>
                     {/* <h3>Create customer</h3> */}
-                    <AddressCreateFrom address/>
+                    <AddressCreateFrom address show_change={()=>this.componentDidMount()}/>
                     <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()} title={this.state.action}>
                         {this.form_switch(this.state.action)}    
                     </ModalForm>
                     
                 </div>
                 {
-                    !this.state.customers?
+                    !this.state.addresses?
                     <p>Loading...</p>
                     :
                     <div>
@@ -93,8 +96,8 @@ class AdminAddress extends React.Component{
                                     return(
                                         <tr key={prod.id} className="table-data">
                                             <td className="text-center">
-                                                <bs.Button to="/Admin/Edit" onClick={e=>this.action_on_obj(prod,"edit")}>EDIT</bs.Button> <br/><br/>
-                                                <bs.Button to="/Admin/Delete" onClick={e=>this.action_on_obj(prod,"delete")}>DELETE</bs.Button>
+                                                <bs.Button onClick={e=>this.action_on_obj(prod,"edit")}>EDIT</bs.Button> <br/><br/>
+                                                <bs.Button onClick={e=>this.action_on_obj(prod,"delete")}>DELETE</bs.Button>
                                             </td>
                                             {Object.entries(prod).map((item,i)=>{
                                                 return(
