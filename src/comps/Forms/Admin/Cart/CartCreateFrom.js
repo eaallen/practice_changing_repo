@@ -18,15 +18,32 @@ class CartrCreateForm extends React.Component{
     componentDidMount = async() =>{
         const arr_customers = await this.props.context.doQueryAll("customer")
         const arr_products = await this.props.context.doQueryAll("product")
+
+        const select_prod = {}
+        for(const product of arr_products){
+            //[false, product.product_name]
+            select_prod[product.id] = {
+                product: product,                
+                selected:false,
+            }
+        }
+
         this.setState({
             customers:arr_customers,
             products:arr_products,
+            selected_products:select_prod
         })
     }
 
     handleChange(e){
         console.log(e.target)
         this.setState({[e.target.name]:e.target.value})
+    }
+
+    change_selected_products = (val, id) =>{
+        this.setState(state=> produce(state, draft=>{
+            draft.selected_products[id].selected = val
+        }))
     }
 
     submit = async(e) =>{
@@ -40,15 +57,7 @@ class CartrCreateForm extends React.Component{
         if(!this.state.products || !this.state.customers){
             return(<div>loading...</div>)
         }
-        const select_prod = []
-        for(const product of this.state.products){
-            //[false, product.product_name]
-            select_prod.push({
-                id:product.id,
-                selected:false,
-                name: product.product_name
-            })
-        }
+        
         return(
             <div>
                 <Row>
@@ -65,7 +74,7 @@ class CartrCreateForm extends React.Component{
                                 >
                                     {this.state.customers.map(item=>{
                                         return(
-                                            <option value={item.id}>{item.customer_email}</option>
+                                            <option key={item.id} value={item.id}>{item.customer_email}</option>
                                         )
                                     })}
                                 </Form.Control>
@@ -77,8 +86,8 @@ class CartrCreateForm extends React.Component{
                                     <Form.Group controlId="customerSize">
                                         <Form.Label>Select Products</Form.Label>
                                         <MultiSelect 
-                                            opt={select_prod} 
-                                            change_avaliable_sizes={this.change_avaliable_sizes}
+                                            opt={this.state.selected_products} 
+                                            change_selected_products={this.change_selected_products}
                                             cart
                                         />                                    
                                     </Form.Group>

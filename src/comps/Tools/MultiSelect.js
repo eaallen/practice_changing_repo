@@ -13,20 +13,28 @@ export default class MultiSelect extends React.Component{
         const name = e.target.name
         this.props.change_avaliable_sizes(val,name)
     }
+
+    handleChange_cart = (e) =>{
+        console.log("multi!", e.target.checked)
+        const val = e.target.checked
+        const id = e.target.id
+        this.props.change_selected_products(val,id)
+    }
     render(){
         if(this.props.cart){
             return(
                 <div>
-                    {this.props.opt.map(item=>{
+                    {Object.values(this.props.opt).map(item=>{
+                        console.log("item---->", item)
                         return(
-                            <div key={item.id}>
+                            <div key={item.product.id+"key"}>
                                 <input 
                                     type="checkbox" 
-                                    name={item.name}
-                                    id={item.id} 
+                                    name={item.product.product_name}
+                                    id={item.product.id} 
                                     checked={item.selected} 
-                                    onChange={e=> this.handleChange(e)}
-                                /> {item.name} 
+                                    onChange={e=> this.handleChange_cart(e)}
+                                /> {item.product.product_name} 
                                  
                             </div>
                         )
