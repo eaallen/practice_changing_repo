@@ -63,7 +63,7 @@ class ProductCreateForm extends React.Component{
         //     }
         // }))
     }
-    handleSubmit = (e) =>{
+    handleSubmit = async(e) =>{
         e.preventDefault()
         const dictionary = this.state.avaliable_sizes // a_s = 
         let values = this.state
@@ -76,7 +76,8 @@ class ProductCreateForm extends React.Component{
             }
         }
         values.avaliable_sizes = arr
-        this.props.context.doCreateOneRecord('product',values)
+        await this.props.context.doCreateOneRecord('product',values)
+        this.props.show_change()
     }
     render(){
         console.log("STATE", this.state)

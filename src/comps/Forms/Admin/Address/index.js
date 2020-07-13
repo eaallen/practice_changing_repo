@@ -61,7 +61,9 @@ class AdminAddress extends React.Component{
 
     render(){
         console.log(this.state.addresses,"address")
-       
+        if(!this.state.addresses){
+            return(<div>loading</div>)
+        }
         return(
             <div>
                 <div>

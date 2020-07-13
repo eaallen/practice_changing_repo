@@ -45,10 +45,11 @@ class ProductUpdateForm extends React.Component{
     //         }
     //     }))
     }
-    handleSubmit = (e) =>{
+    handleSubmit = async(e) =>{
         e.preventDefault()
         console.log("submit!!", this.state, this.props.product.id)
-        this.props.context.doUpdateOneRecord("product", this.state, this.props.product.id) // collection, obj, id
+        await this.props.context.doUpdateOneRecord("product", this.state, this.props.product.id) // collection, obj, id
+        this.props.show_change()
     }
     render(){
         console.log("state of ProductUpdateForm{}",this.state)

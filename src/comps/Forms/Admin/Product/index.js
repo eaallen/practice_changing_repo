@@ -52,18 +52,21 @@ class AdminProduct extends React.Component{
 
     render(){
         console.log(this.props.products,"products")
+        if(!this.state.products){
+            return(<div>loading</div>)
+        }
         return(
             <div>
                 <div>
                     {/* <h3>Create Product</h3> */}
-                    <ProductCreateFrom/>
+                    <ProductCreateFrom show_change={()=>this.componentDidMount()}/>
                     <ModalForm show={this.state.modal_on} handle_modal={()=>this.handle_modal()} title={this.state.action}>
                         {this.form_switch(this.state.action)}    
                     </ModalForm>
                     
                 </div>
                 {
-                    !this.state.products?
+                    this.state.products.length===0?
                     <p>Loading...</p>
                     :
                     <div>
