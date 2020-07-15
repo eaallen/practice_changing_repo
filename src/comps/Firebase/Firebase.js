@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 import React from 'react' 
 import produce from 'immer'
 export const AppContext = React.createContext()
@@ -40,6 +41,8 @@ export const AppContext = React.createContext()
             doDeleteOneRecord: this.doDeleteOneRecord,
             doCreateOneRecord: this.doCreateOneRecord,
             doUpdateOneRecord: this.doUpdateOneRecord,
+            firebaseTimestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+            getImgURL: this.getImgURL,
           }
           this.state = {
             test:'this is comming from the firbase context provider',
@@ -50,8 +53,13 @@ export const AppContext = React.createContext()
           firebase.initializeApp(config);
           console.log(firebase.app())
           this.auth = firebase.auth();
+          this.storage = firebase.storage();
           this.db = firebase.firestore()
-          this.googleProvider =new firebase.auth.GoogleAuthProvider();
+          // var storageRef = this.storage.ref('Engagements-26.jpg');
+          // var pathRef = this.storage.ref('Engagements-26.jpg')
+          // console.log("pathRef------>",pathRef)
+          // pathRef.getDownloadURL().then(function(url) {console.log("URL_____>",url)})
+          // this.googleProvider =new firebase.auth.GoogleAuthProvider();
           this.auth.onAuthStateChanged(function(user) {
             if (user){
               console.log('we have a user!')
@@ -61,6 +69,12 @@ export const AppContext = React.createContext()
           });
         }
 
+        // get the image from firebase storage 
+        getImgURL = async(img_name) =>{
+          let path_ref = this.storage.ref(img_name)
+          let url = await path_ref.getDownloadURL().catch(err=>{console.error(err)})
+          return url
+        }
         
         updateUserAuth = (userInfo) =>{
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")

@@ -9,7 +9,9 @@ class ShopBase extends React.Component{
             data: [1,2,3,4,5,7,8]
         }
     }
-
+    componentDidMount = async() =>{
+        // get products
+    }
     render(){
         return(
             <div>
@@ -19,9 +21,9 @@ class ShopBase extends React.Component{
                     </h1>
                 </div>
                 <bs.CardColumns>
-                    {this.state.data.map(item=>{
+                    {this.props.context.products.map(item=>{
                         return(
-                            <ItemCard title='Lorem' price='$23.33'id={item} key={item}/>
+                            <ItemCard product={item} key={item.id}/>
                         )
                     })}
                 </bs.CardColumns>

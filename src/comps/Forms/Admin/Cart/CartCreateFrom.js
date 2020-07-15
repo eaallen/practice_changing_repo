@@ -9,9 +9,8 @@ class CartrCreateForm extends React.Component{
         
         this.state = {
             // bool: true
-            customer_email:"",
-            customer_size:"XXS",
-            addShippingAddress:false,
+            cart_customer_id:"",
+            selected_products: false,
         }
     }
 
@@ -31,13 +30,16 @@ class CartrCreateForm extends React.Component{
         this.setState({
             customers:arr_customers,
             products:arr_products,
-            selected_products:select_prod
+            selected_products:select_prod,
+            cart_customer_id:arr_customers[0].id,
         })
     }
 
     handleChange(e){
         console.log(e.target)
-        this.setState({[e.target.name]:e.target.value})
+        let name = e.target.name
+        let value = e.target.value
+        this.setState({[name]:value})
     }
 
     change_selected_products = (val, id) =>{
@@ -49,11 +51,21 @@ class CartrCreateForm extends React.Component{
     submit = async(e) =>{
         e.preventDefault()
         const data = this.state
-        delete data.addShippingAddress
-        delete data.addresses
-        this.props.context.doCreateOneRecord("cart",data)
+        delete data.products
+        delete data.customers
+        data.cart_product = []
+        for(const prod of Object.values(data.selected_products)){
+            console.log(prod,"<<<<<<<<")
+            if(prod.selected){
+                // add the item to the cart as well as the time the item was added.
+                data.cart_product.push({[prod.product.id]:prod.product,time_selected:this.props.context.firebaseTimestamp})
+            }
+        }
+        delete data.selected_products
+        this.props.context.doCreateOneRecord(`customer/${this.state.cart_customer_id}/cart`,{products:data.cart_product})
     }
     render(){
+        console.log("CART-State---->", this.state)
         if(!this.state.products || !this.state.customers){
             return(<div>loading...</div>)
         }
@@ -68,13 +80,13 @@ class CartrCreateForm extends React.Component{
                                 <Form.Label>Select Customer</Form.Label>
                                 <Form.Control 
                                     as="select"
-                                    name="customer_size"
-                                    value={this.state.customer_size}
+                                    name="cart_customer_id"
+                                    value={this.state.cart_customer_id}
                                     onChange={e => this.handleChange(e)}
                                 >
                                     {this.state.customers.map(item=>{
                                         return(
-                                            <option key={item.id} value={item.id}>{item.customer_email}</option>
+                                            <option key={item.id} value={item.id}>{item.customer_email} ({item.id})</option>
                                         )
                                     })}
                                 </Form.Control>
