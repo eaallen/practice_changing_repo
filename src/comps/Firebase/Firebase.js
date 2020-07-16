@@ -55,11 +55,7 @@ export const AppContext = React.createContext()
           this.auth = firebase.auth();
           this.storage = firebase.storage();
           this.db = firebase.firestore()
-          // var storageRef = this.storage.ref('Engagements-26.jpg');
-          // var pathRef = this.storage.ref('Engagements-26.jpg')
-          // console.log("pathRef------>",pathRef)
-          // pathRef.getDownloadURL().then(function(url) {console.log("URL_____>",url)})
-          // this.googleProvider =new firebase.auth.GoogleAuthProvider();
+          
           this.auth.onAuthStateChanged(function(user) {
             if (user){
               console.log('we have a user!')

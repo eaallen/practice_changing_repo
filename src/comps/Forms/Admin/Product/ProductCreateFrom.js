@@ -69,8 +69,8 @@ class ProductCreateForm extends React.Component{
         let values = this.state
         let arr = []
         for(const key in dictionary){ // get keys from dictionary 
-            console.log("-----> key", key)
-            console.log("-----> value", dictionary[key])
+            // console.log("-----> key", key)
+            // console.log("-----> value", dictionary[key])
             if(dictionary[key]){
                 arr.push(key)
             }
@@ -78,6 +78,10 @@ class ProductCreateForm extends React.Component{
         values.avaliable_sizes = arr
         await this.props.context.doCreateOneRecord('product',values)
         this.props.show_change()
+    }
+    handleImage = (e) =>{
+        let files = e.target.value
+        console.log("________MMMMM_____MMMM____", files)
     }
     render(){
         console.log("STATE", this.state)
@@ -114,7 +118,7 @@ class ProductCreateForm extends React.Component{
                                             id="selectImage" 
                                             label="Select Image" 
                                             name="image_name"
-                                            onChange={e => this.handleChange(e)}
+                                            onChange={e => this.handleImage(e)}
                                             />  
                                     </Form.Group>
                                 

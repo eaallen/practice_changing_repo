@@ -3,28 +3,27 @@ import {withFirebase} from '../Firebase'
 import * as bs from 'react-bootstrap'
 import ItemCard from './ItemCard'
 function ShowCase(props) {
-    let data =  random_id()
+    let data =  random_id(props.context.products)
 
   return (
     <div className="">
         <bs.Jumbotron className='text-dark'>
             <bs.Row>
-                <bs.Col md={4}>
-                    <ItemCard title='Lorem' price='$23.33' id={data[0]}/>
-                </bs.Col>
-                <bs.Col md={4}>
-                    <ItemCard title='Lorem' price='$23.33'id={data[1]}/>
-                </bs.Col>
-                <bs.Col md={4}>
-                    <ItemCard title='Lorem' price='$23.33'id={data[2]}/>
-                </bs.Col>
+                {data.map((item,idx)=>{
+                    return(
+                        <bs.Col md={4} key={idx}>
+                            <ItemCard product={item}/>
+                        </bs.Col>
+                    )
+                })}
             </bs.Row>   
         </bs.Jumbotron>    
     </div>
   );
 }
-const random_id = () =>{
-    let arr = [1,2,3,4,5,7,8]
+const random_id = (array_of_products) =>{
+    console.log("Arr------>",array_of_products)
+    let arr = array_of_products
     let arr_id = []
     for(let icount = 1; icount <= 3; icount++){
         let id
@@ -33,6 +32,6 @@ const random_id = () =>{
         }while(arr_id.includes(id))
         arr_id.push(id)
     }
-    return arr_id
+    return [arr[0],arr[1],arr[4]]
 }
 export default withFirebase(ShowCase);
