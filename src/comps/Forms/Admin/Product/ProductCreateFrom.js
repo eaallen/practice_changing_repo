@@ -11,7 +11,7 @@ class ProductCreateForm extends React.Component{
          this.state = {
             product_name:"",
             product_description:"",
-            image_name:7,
+            image_name:"",
             product_color:"",
             product_price:0.00,
             product_catagory:"Men",
@@ -80,8 +80,10 @@ class ProductCreateForm extends React.Component{
         this.props.show_change()
     }
     handleImage = (e) =>{
-        let files = e.target.value
-        console.log("________MMMMM_____MMMM____", files)
+        let files = e.target.files
+        let picture_name =  files[0].name
+        this.setState({image_name:picture_name})
+
     }
     render(){
         console.log("STATE", this.state)
