@@ -78,6 +78,7 @@ class ProductCreateForm extends React.Component{
         values.avaliable_sizes = arr
         delete values.file
         await this.props.context.doCreateOneRecord('product',values)
+        this.props.context.deleteImg(this.props.product.image_name)
         await this.props.context.postImg(this.state.file, this.state.image_name)
         this.props.show_change()
     }
@@ -117,14 +118,14 @@ class ProductCreateForm extends React.Component{
                                 />
                             </Form.Group>
                             
-                                    <Form.Group>
-                                        <Form.File 
-                                            id="selectImage" 
-                                            label="Select Image" 
-                                            name="image_name"
-                                            onChange={e => this.handleImage(e)}
-                                            />  
-                                    </Form.Group>
+                            <Form.Group>
+                                <Form.File 
+                                    id="selectImage" 
+                                    label="Select Image" 
+                                    name="image_name"
+                                    onChange={e => this.handleImage(e)}
+                                    />  
+                            </Form.Group>
                                 
                             <Row>
                                 <Col lg={6}>

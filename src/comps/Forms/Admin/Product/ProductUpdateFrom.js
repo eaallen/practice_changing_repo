@@ -11,7 +11,7 @@ class ProductUpdateForm extends React.Component{
             //  key:value
             product_name:this.props.product.product_name,
             product_description:this.props.product.product_description,
-            image_name: 1,
+            image_name: this.props.product.image_name,
             product_color:this.props.product.product_color,
             product_price:this.props.product.product_price,
             product_catagory:this.props.product.product_catagory,
@@ -19,7 +19,8 @@ class ProductUpdateForm extends React.Component{
             avaliable_sizes:this.props.product.avaliable_sizes,
             product_current_size:this.props.product.product_current_size,
             product_reserved:this.props.product.product_reserved,
-            product_customize:this.props.product_customize || false
+            product_customize:this.props.product_customize || false,
+            timestamp: this.props.timestamp
         }
     }
     handleChange(e){
@@ -47,10 +48,20 @@ class ProductUpdateForm extends React.Component{
     }
     handleSubmit = async(e) =>{
         e.preventDefault()
-        console.log("submit!!", this.state, this.props.product.id)
-        await this.props.context.doUpdateOneRecord("product", this.state, this.props.product.id) // collection, obj, id
+        let state = {...this.state}
+        delete state.file
+        console.log("submit!!", state, this.props.product.id)
+        await this.props.context.doUpdateOneRecord("product", state, this.props.product.id) // collection, obj, id
+        await this.props.context.postImg(this.state.file, this.state.image_name)
         this.props.show_change()
     }
+
+    handleImage = (e) =>{
+        let files = e.target.files
+        let picture_name =  files[0].name
+        this.setState({image_name:picture_name, file:files[0]})
+    }
+
     render(){
         console.log("state of ProductUpdateForm{}",this.state)
         return(
@@ -82,17 +93,15 @@ class ProductUpdateForm extends React.Component{
                                     onChange={e => this.handleChange(e)}
                                 />
                             </Form.Group>
-                            
-                            
                                 
-                                    <Form.Group>
-                                        <Form.File 
-                                            id="selectImage" 
-                                            label="Select Image" 
-                                            name="image_name"
-                                            onChange={e => this.handleChange(e)} 
-                                        />  
-                                    </Form.Group>
+                            <Form.Group>
+                                <Form.File 
+                                    id="selectImage" 
+                                    label="Select Image" 
+                                    name="image_name"
+                                    onChange={e => this.handleImage(e)}
+                                />  
+                            </Form.Group>
                                 
                             <Row>
                                 <Col lg={6}>
