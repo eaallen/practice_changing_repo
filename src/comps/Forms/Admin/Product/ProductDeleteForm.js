@@ -13,7 +13,7 @@ class ProductDeleteForm extends React.Component{
     }
     handle_delete = () =>{
         this.props.context.doDeleteOneRecord("product",this.props.product.id)
-        this.props.history.push('/Admin/Product')
+        this.props.context.deleteImg(this.props.product.image_name)
         this.props.show_change()
     }
     render(){

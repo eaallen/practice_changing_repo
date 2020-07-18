@@ -66,7 +66,7 @@ class ProductCreateForm extends React.Component{
     handleSubmit = async(e) =>{
         e.preventDefault()
         const dictionary = this.state.avaliable_sizes // a_s = 
-        let values = this.state
+        let values = {...this.state}
         let arr = []
         for(const key in dictionary){ // get keys from dictionary 
             // console.log("-----> key", key)
@@ -76,13 +76,15 @@ class ProductCreateForm extends React.Component{
             }
         }
         values.avaliable_sizes = arr
+        delete values.file
         await this.props.context.doCreateOneRecord('product',values)
+        await this.props.context.postImg(this.state.file, this.state.image_name)
         this.props.show_change()
     }
     handleImage = (e) =>{
         let files = e.target.files
         let picture_name =  files[0].name
-        this.setState({image_name:picture_name})
+        this.setState({image_name:picture_name, file:files[0]})
 
     }
     render(){

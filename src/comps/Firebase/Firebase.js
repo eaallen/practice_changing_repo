@@ -43,6 +43,8 @@ export const AppContext = React.createContext()
             doUpdateOneRecord: this.doUpdateOneRecord,
             firebaseTimestamp: firebase.firestore.Timestamp.fromDate(new Date()),
             getImgURL: this.getImgURL,
+            postImg: this.postImg,
+            deleteImg: this.deleteImg,
           }
           this.state = {
             test:'this is comming from the firbase context provider',
@@ -72,6 +74,20 @@ export const AppContext = React.createContext()
           return url
         }
         
+        postImg = async(file, name) =>{
+          let path_ref = this.storage.ref(name)
+          path_ref.put(file).then(function(snapshot) {
+            console.log('Uploaded a blob or file!');
+          }).catch(err=>{console.error(err)})
+        }
+
+        deleteImg = async(img_name) => {
+          let path_ref = this.storage.ref(img_name)
+          path_ref.delete().then(function(snapshot) {
+            console.log('Deleted ' + img_name);
+          }).catch(err=>{console.error(err)})
+        }
+
         updateUserAuth = (userInfo) =>{
           console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
         }
