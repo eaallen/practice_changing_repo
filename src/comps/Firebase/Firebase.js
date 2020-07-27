@@ -122,7 +122,6 @@ export const AppContext = React.createContext()
             });
             arr.push(ordered)
           }
-          console.log(arr,"<<<<<<<")
           return arr
         } 
         
@@ -196,6 +195,7 @@ export const AppContext = React.createContext()
       async componentDidMount(){
       // STUFF YOU DO RIGHT AT THE BEGINING
         const info = await this.doQueryAll('product')
+        console.log("info---->",info[0])
         this.setState(state=> produce(state, draft=>{
           draft.products = info
         }))

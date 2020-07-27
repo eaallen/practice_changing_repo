@@ -4,7 +4,7 @@ import * as bs from 'react-bootstrap'
 import ItemCard from './ItemCard'
 function ShowCase(props) {
     let data =  random_id(props.context.products)
-
+    console.log("affter random_id")
   return (
     <div className="">
         <bs.Jumbotron className='text-dark'>
@@ -24,14 +24,14 @@ function ShowCase(props) {
 const random_id = (array_of_products) =>{
     console.log("Arr------>",array_of_products)
     let arr = array_of_products
-    let arr_id = []
-    for(let icount = 1; icount <= 3; icount++){
-        let id
-        do{
-            id = Math.ceil(Math.random()*arr.length)
-        }while(arr_id.includes(id))
-        arr_id.push(id)
-    }
-    return [arr[0],arr[1],arr[4]]
+    // let arr_id = []
+    // for(let icount = 1; icount <= 3; icount++){
+    //     let id
+    //     do{
+    //         id = Math.ceil(Math.random()*arr.length)
+    //     }while(arr_id.includes(id))
+    //     arr_id.push(id)
+    // }
+    return arr
 }
 export default withFirebase(ShowCase);
