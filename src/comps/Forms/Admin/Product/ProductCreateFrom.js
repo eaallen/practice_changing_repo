@@ -68,18 +68,17 @@ class ProductCreateForm extends React.Component{
         const dictionary = this.state.avaliable_sizes // a_s = 
         let values = {...this.state}
         let arr = []
-        for(const key in dictionary){ // get keys from dictionary 
-            // console.log("-----> key", key)
-            // console.log("-----> value", dictionary[key])
-            if(dictionary[key]){
-                arr.push(key)
-            }
-        }
+        // for(const key in dictionary){ // get keys from dictionary 
+        //     if(dictionary[key]){
+        //         arr.push(key)
+        //     }
+        // }
         values.avaliable_sizes = arr
         delete values.file
+        
+        // this.props.context.deleteImg(this.props.product.image_name)
+        values.image_name = await this.props.context.postImg(this.state.file, this.state.image_name) // image_name is now a link
         await this.props.context.doCreateOneRecord('product',values)
-        this.props.context.deleteImg(this.props.product.image_name)
-        await this.props.context.postImg(this.state.file, this.state.image_name)
         this.props.show_change()
     }
     handleImage = (e) =>{

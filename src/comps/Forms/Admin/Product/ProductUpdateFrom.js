@@ -2,6 +2,7 @@ import { withFirebase } from "../../../Firebase"
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import produce from 'immer'
+import MultiSelect from '../../../Tools/MultiSelect'
 let arr = []
 class ProductUpdateForm extends React.Component{
     constructor(props){
@@ -46,6 +47,12 @@ class ProductUpdateForm extends React.Component{
     //         }
     //     }))
     }
+    change_avaliable_sizes = (val,size_name) => { // val: bool size_name: string
+        this.setState(state=> produce(state, draft=>{
+            draft.avaliable_sizes[size_name] = val
+        }))
+        console.log("val", val)
+    }
     handleSubmit = async(e) =>{
         e.preventDefault()
         let state = {...this.state}
@@ -76,31 +83,32 @@ class ProductUpdateForm extends React.Component{
                             <Form.Group controlId="productName">
                                 <Form.Label>Name of Product</Form.Label>
                                 <Form.Control 
-                                    type="text" 
-                                    name="product_name" 
-                                    value={this.state.product_name} 
+                                    type="text"
+                                    name="product_name"
+                                    value={this.state.product_name}
                                     onChange={e => this.handleChange(e)}
+                                    required
                                 />
                             </Form.Group>
 
                             <Form.Group controlId="productDescription">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control 
-                                    as="textarea" 
+                                <Form.Control as="textarea" 
                                     rows="3" 
-                                    name="product_description" 
-                                    value={this.state.product_description} 
+                                    name="product_description"
+                                    value={this.state.product_description}
                                     onChange={e => this.handleChange(e)}
+                                    required
                                 />
                             </Form.Group>
-                                
+                            
                             <Form.Group>
                                 <Form.File 
                                     id="selectImage" 
                                     label="Select Image" 
                                     name="image_name"
                                     onChange={e => this.handleImage(e)}
-                                />  
+                                    />  
                             </Form.Group>
                                 
                             <Row>
@@ -109,23 +117,26 @@ class ProductUpdateForm extends React.Component{
                                         <Form.Label>Color</Form.Label>
                                         <Form.Control 
                                             type="text" 
-                                            placeholder="Red, Blue, Yellow, etc." 
-                                            name="product_color" 
+                                            placeholder="Red, Blue, Yellow, etc."
+                                            name="product_color"
                                             value={this.state.product_color}
-                                            onChange={e => this.handleChange(e)} 
-                                        />
+                                            onChange={e => this.handleChange(e)}
+                                            required
+                                            />
                                     </Form.Group>
                                 </Col>
 
                                 <Col lg={6}>
                                     <Form.Group controlId="productPrice">
                                         <Form.Label>Products Price</Form.Label>
-                                        <Form.Control type="number" 
-                                            placeholder="$" 
+                                        <Form.Control 
+                                            type="number" 
+                                            placeholder="$"
                                             name="product_price"
-                                            value={this.state.product_price} 
+                                            value={this.state.product_price}
                                             onChange={e => this.handleChange(e)}
-                                        />
+                                            required
+                                            />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -134,13 +145,15 @@ class ProductUpdateForm extends React.Component{
                                 <Col lg={6}>
                                     <Form.Group controlId="productCatagory">
                                         <Form.Label>Catagory</Form.Label>
-                                            <Form.Control as="select" name="product_catagory"
-                                                value={this.state.product_catagory} 
+                                            <Form.Control 
+                                                as="select"
+                                                name="product_catagory"
+                                                value={this.state.product_catagory}
                                                 onChange={e => this.handleChange(e)}
-                                            >
-                                                <option>Men</option>
-                                                <option>Women</option>
-                                                <option>Children</option>
+                                                >
+                                            <option>Men</option>
+                                            <option>Women</option>
+                                            <option>Children</option>
                                             </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -148,14 +161,16 @@ class ProductUpdateForm extends React.Component{
                                 <Col lg={6}>
                                     <Form.Group controlId="productType">
                                         <Form.Label>Product Type</Form.Label>
-                                            <Form.Control as="select" name="product_type"
-                                                value={this.state.product_type} 
+                                            <Form.Control 
+                                                as="select"
+                                                name="product_type"
+                                                value={this.state.product_type}
                                                 onChange={e => this.handleChange(e)}
                                             >
-                                                <option>Shirt</option>
-                                                <option>Pants</option>
-                                                <option>Dress</option>
-                                                <option>Sandles</option>
+                                            <option>Shirt</option>
+                                            <option>Pants</option>
+                                            <option>Dress</option>
+                                            <option>Sandles</option>
                                             </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -163,29 +178,19 @@ class ProductUpdateForm extends React.Component{
 
                             <Row>
                                 <Col lg={6}>
-                                    <Form.Group controlId="availableSize">
+                                    <Form.Group controlId="avaliableSize">
                                         <Form.Label>Available Size:</Form.Label>
-                                            <Form.Control 
-                                                as="select" 
-                                                multiple 
-                                                name="avaliable_sizes"
-                                                value={this.state.avaliable_sizes} 
-                                                onChange={e => this.avaliable_sizes(e)}
-                                            >
-                                                <option value="xs">XS</option>
-                                                <option value="s">S</option>
-                                                <option value="m">M</option>
-                                                <option value="l">L</option>
-                                                <option value="xl">XL</option>
-                                            </Form.Control>
+                                        <MultiSelect opt={this.state.avaliable_sizes} change_avaliable_sizes={this.change_avaliable_sizes}/>
                                     </Form.Group>
                                 </Col>
 
                                 <Col lg={6}>
                                     <Form.Group controlId="currentSize">
                                         <Form.Label>Product Current Size:</Form.Label>
-                                            <Form.Control as="select" name="product_current_size"
-                                                value={this.state.product_current_size} 
+                                            <Form.Control 
+                                                as="select"
+                                                name="product_current_size"
+                                                value={this.state.product_current_size}
                                                 onChange={e => this.handleChange(e)}
                                             >
                                                 <option>XS</option>
@@ -199,23 +204,28 @@ class ProductUpdateForm extends React.Component{
                             </Row>
 
                             <Form.Check 
-                                    id="productReserved"
-                                    label="Is product reserved?"
-                                    name="product_reserved"
-                                    checked={this.state.product_reserved} 
-                                    onChange={e => this.handleChange(e)}
-                                    />
-
-                            <Form.Check 
-                                id="productCustomize"
-                                label="Can size be adjusted?"
-                                name="product_customize"
-                                checked={this.state.product_customize} 
+                                // type="switch"
+                                id="productReserved"
+                                label="Is product reserved?"
+                                name="product_reserved"
+                                value={this.state.product_reserved}
                                 onChange={e => this.handleChange(e)}
                             />
 
+                            <Form.Check 
+                                // type="switch"
+                                id="productCustomize"
+                                label="Can size be adjusted?"
+                                name="product_customize"
+                                // value={this.state.product_customize}
+                                value={true}
+                                onChange={e => this.handleChange(e)}
+                            />
+                            
+                            <br/>
+
                             <Button variant="primary" type="submit">
-                                Done
+                                Create
                             </Button>
                         </Form>
                     </Col>

@@ -70,15 +70,18 @@ export const AppContext = React.createContext()
         // get the image from firebase storage 
         getImgURL = async(img_name) =>{
           let path_ref = this.storage.ref(img_name)
+          console.log("path_ref------------->", path_ref)
           let url = await path_ref.getDownloadURL().catch(err=>{console.error(err)})
+          console.log("URL------------->", url)
           return url
         }
         
         postImg = async(file, name) =>{
           let path_ref = this.storage.ref(name)
-          path_ref.put(file).then(function(snapshot) {
-            console.log('Uploaded a blob or file!');
-          }).catch(err=>{console.error(err)})
+          let snapshot = await path_ref.put(file).catch(err=>{console.error(err)})
+          return snapshot.ref.getDownloadURL().catch(err=>{console.error(err)})
+          // use async function
+          
         }
 
         deleteImg = async(img_name) => {
