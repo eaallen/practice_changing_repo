@@ -73,7 +73,7 @@ class ProductCreateForm extends React.Component{
         //         arr.push(key)
         //     }
         // }
-        values.avaliable_sizes = arr
+        // values.avaliable_sizes = arr
         delete values.file
         
         // this.props.context.deleteImg(this.props.product.image_name)

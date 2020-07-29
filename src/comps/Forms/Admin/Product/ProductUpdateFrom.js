@@ -56,8 +56,9 @@ class ProductUpdateForm extends React.Component{
     handleSubmit = async(e) =>{
         e.preventDefault()
         let state = {...this.state}
+        state.timestamp = this.state.timestamp
         delete state.file
-        console.log("submit!!", state, this.props.product.id)
+        console.log("submit!!", this.state, this.props.product.id)
         await this.props.context.doUpdateOneRecord("product", state, this.props.product.id) // collection, obj, id
         await this.props.context.postImg(this.state.file, this.state.image_name)
         this.props.show_change()

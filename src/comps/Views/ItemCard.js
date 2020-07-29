@@ -8,16 +8,8 @@ class ItemCard extends React.Component {
       img: null,
     }
   }
-  
-  componentDidMount = async() =>{
-    let image = await this.props.context.getImgURL(this.props.product.image_name)
-    this.setState({img:image})
-  }
 
   render(){
-    if(!this.state.img){
-      return<div>loading</div>
-    }
     return (
       <Link to={`/ItemDetail/${this.props.product.id}`}>
         <div className="text-center card">
@@ -25,7 +17,7 @@ class ItemCard extends React.Component {
                 {this.props.product.product_name}
             </div>   
             <div className='card-body'>
-                <img className='image item_img' src={this.state.img} alt="IMG HERE <<<"/>            
+                <img className='image item_img' src={this.props.product.image_name} alt="IMG HERE <<<"/>            
             </div>   
             <div className='card-foot'>
                 ${this.props.product.product_price}

@@ -11,22 +11,37 @@ function ItemDetail(props) {
     return (
         <div style={{padding:'1rem'}}>
             <bs.Row>
-                <bs.Col>
+                <bs.Col lg={6}>
                     <div className='image-container'>
-                        <img className='image-detail' src={`/img/${2}.jpg`} alt=""/>
+                        <img className='image-detail' src={item.image_name} alt=""/>
                     </div>
                 </bs.Col>
-                <bs.Col>
+                <bs.Col lg={6}>
                     <div>
                         <h1>{item.product_name}</h1>
                         <p>
                             {item.product_description}
                         </p>
+                        <br/>
+                        <bs.Form.Label>Size</bs.Form.Label>
+                        <bs.Form.Control 
+                            as="select"
+                            name="product_catagory"
+                        >
+                            {Object.entries(item.avaliable_sizes).map(elem => {
+                                if(elem[1]){
+                                    return(
+                                        <option key={elem[0]}>{elem[0].toUpperCase()}</option>
+                                    )
+                                }
+                            })}
+                        </bs.Form.Control>
+
                         <br></br>
                         <p>
-                            ${item.product_price}
+                            Price: ${item.product_price}
                         </p>
-                        <Link className="btn btn-dark" to={`/purchase/${id}`}>Purchase</Link>
+                        <Link className="btn btn-dark" to={`/purchase/${id}`}>Add to Cart</Link>
                     </div>
                 </bs.Col>
             </bs.Row>

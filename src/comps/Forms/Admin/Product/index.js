@@ -96,11 +96,24 @@ class AdminProduct extends React.Component{
                                                 return(
                                                     <td key={i}>
                                                         {
-                                                            item[0]==="product_date"?
+                                                            item[0]==="timestamp"?
                                                             <>{item[1].seconds}</>
+                                                            :
+                                                            item[0]==="avaliable_sizes"?
+                                                            <>
+                                                                {  
+                                                                    Object.entries(item[1]).filter(x => x[1]===true).map((item)=>{
+                                                                        
+                                                                        return(
+                                                                            <span key={item[0]}>{item[0]} <br/></span> 
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </>
                                                             :
                                                             <>{item[1].toString()}</>   
                                                         }
+                                                       
                                                         
                                                     </td>
                                                 )

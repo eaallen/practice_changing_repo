@@ -150,6 +150,7 @@ export const AppContext = React.createContext()
           return success
         }
         doUpdateOneRecord = async(_collection, obj, id) =>{
+          console.log("update obj", obj)
           obj.timestamp.push(firebase.firestore.Timestamp.fromDate(new Date()))
           let success = false
           await this.db.collection(_collection).doc(id).set(obj).then(()=>{
